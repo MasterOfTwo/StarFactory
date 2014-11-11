@@ -10,6 +10,10 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\PlanetTranslation_src.gml</script>
+    <script>scripts\OnPlanetCreation_src.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\sun_o</object>
     <object>objects\camera_o</object>
