@@ -28,7 +28,6 @@
             <string>target = sun_o;
 x = target.x + 57 + 34.5;
 z = 0
-m = 20000;
 zspeed = 0
 zsize = 16 // size on Z axis
 

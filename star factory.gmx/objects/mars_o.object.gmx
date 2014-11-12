@@ -29,8 +29,6 @@
 myspeed = 1.0;
 //227,900,000 km
 x = target.x + 227 + 34.5;
-place = 0;
-m = 1300;
 z = 0
 zspeed = 0
 zsize = 16 // size on Z axis
