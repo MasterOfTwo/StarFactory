@@ -25,10 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>px=0
+            <string>px=640-160;
 py=64
 sliderPos=0;
-name="Hydrogen";
+name="Li - Fe";
 </string>
           </argument>
         </arguments>

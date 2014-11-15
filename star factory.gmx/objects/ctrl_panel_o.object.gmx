@@ -27,14 +27,19 @@
             <kind>1</kind>
             <string>px=520
 py=456
+updating=0;
 dcenter=24;
 isOn=0;
 sliderTrackX=18;
 sliderTrackY=-12;
 sliderButtonX=sliderTrackX+8;
 sliderButtonY=sliderTrackY;
-textX=24;
+textX=8;
 textY=16;
+rot=0;
+
+ppx=452;
+ppy=456;
 </string>
           </argument>
         </arguments>
@@ -57,18 +62,31 @@ textY=16;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(mouse_check_button_pressed(mb_left)){
+            <string>if(!updating &amp;&amp; mouse_check_button_pressed(mb_left)){
     mx=mouse_x;
     my=mouse_y;
-    if(mx&gt;px-dcenter &amp;&amp; mx&lt;=px+dcenter &amp;&amp; my&gt;py-dcenter &amp;&amp; my&lt;=py+dcenter)
+    if(mx&gt;px-dcenter &amp;&amp; mx&lt;=px+dcenter &amp;&amp; my&gt;py-dcenter &amp;&amp; my&lt;=py+dcenter){
         isOn=(isOn+1)%2;
+        rot=(rot+180)%360;
+    }
+    if(isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
+        updating=(updating+1)%2;
+        timer=90;
+    }
+}
+if(updating){
+    sun_o.mH+=hidrogen_slider_o.sliderPos/90;
+    sun_o.mHe+=helium_slider_o.sliderPos/90;
+    sun_o.mLi2Fe+=other_elems_slider_o.sliderPos/90;
+    timer--;
+    if(timer&lt;=0) updating=(updating+1)%2;
 }
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="74">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -85,7 +103,17 @@ textY=16;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(ctrl_panel_sp, 0,px,py);
+            <string>if(isOn &amp;&amp; !updating){
+    draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
+    draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
+    draw_sprite(play_sp,0,ppx,ppy);
+    draw_text(16,120,"Mass: "+string(sun_o.m));
+    draw_text(16,140,"Hydrogen: "+string(sun_o.mH/sun_o.m));
+    draw_text(16,160,"Helium: "+string(sun_o.mHe/sun_o.m));
+    draw_text(16,180,"Li - Fe: "+string(sun_o.mLi2Fe/sun_o.m));
+    draw_text(16,200,"Heavy: "+string(sun_o.mHeavy/sun_o.m));
+}
+if(!updating)draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
 </string>
           </argument>
         </arguments>

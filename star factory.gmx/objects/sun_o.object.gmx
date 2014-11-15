@@ -28,14 +28,87 @@
             <string>globalvar deltaT;
 globalvar G;
 deltaT=0.1;
-G=0.5;
-
+G=5;
+color=c_aqua;
 z = 0;
-m = 9000;
+mH = 100;
+mHe = 0;
+mLi2Fe = 0;
+mHeavy = 0;
 zspeed = 0
 zsize = 16; // size on Z axis
 facing = 0; // facing direction
 tfacing = 0; // target facing direction
+m=mH+mHe+mLi2Fe+mHeavy;
+radius=11.5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(ctrl_panel_o.updating){
+    m=mH+mHe+mLi2Fe+mHeavy;
+    radius=11.5+(m-100)*0.115*(1/3);
+    if(mHe/m&lt;0.2){
+        if((mLi2Fe+mHeavy)/m&lt;0.2){
+            //amarela
+            mHdiff=min(mH,m*0.02/30);
+            mH-=mHdiff;
+            mHe+=mHdiff;
+            mHediff=min(mHe,m*0.01/30);
+            mHe-=mHdiff;
+            mLi2Fe+=mHdiff;
+            color=c_yellow;
+        }else{
+            //azul
+            mHdiff=min(mH,m*0.01/30);
+            mH-=mHdiff;
+            mHe+=mHdiff;
+            color=c_aqua;
+        }
+    }else{
+        if(mH/m&lt;0.01){
+            //vermelha
+            mHdiff=min(mH,m*0.03/30);
+            mH-=mHdiff;
+            mHe+=mHdiff;
+            mHediff=min(mHe,m*0.02/30);
+            mHe-=mHdiff;
+            mLi2Fe+=mHdiff;
+            mLi2Fediff=min(mLi2Fe,m*0.01/30);
+            mLi2Fe-=mLi2Fediff;
+            mHeavy+=mLi2Fe;      
+            color=c_orange;
+        }else{
+            //amarela
+            mHdiff=min(mH,m*0.02/30);
+            mH-=mHdiff;
+            mHe+=mHdiff;
+            mHediff=min(mHe,m*0.01/30);
+            mHe-=mHdiff;
+            mLi2Fe+=mHdiff;
+            color=c_yellow;
+        }
+    }
+    radius*=1+((mLi2Fe/m)+(3*mHeavy/m));
+}
 </string>
           </argument>
         </arguments>
@@ -58,11 +131,11 @@ tfacing = 0; // target facing direction
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(33023)
+            <string>draw_set_color(color)
 d3d_transform_set_identity()
 d3d_transform_add_translation(x+0,y+0,0)
 //695 800 radius
-d3d_draw_ellipsoid(-34.5,-34.5,-34.5,34.5,34.5,34.5,-1,1,1,20)
+d3d_draw_ellipsoid(-radius,-radius,-radius,radius,radius,radius,-1,1,1,20)
 //d3d_draw_ellipsoid(5,5,5,5,5,5,-1,1,1,20)
 d3d_transform_set_identity()
 draw_set_color(c_white)

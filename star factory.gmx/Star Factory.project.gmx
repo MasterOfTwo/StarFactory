@@ -11,6 +11,8 @@
     <sprite>sprites\slider_sp</sprite>
     <sprite>sprites\slider_track_sp</sprite>
     <sprite>sprites\slider_background_sp</sprite>
+    <sprite>sprites\gui_guard_sp</sprite>
+    <sprite>sprites\play_sp</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -41,6 +43,8 @@
     <object>objects\neptune_orbit_o</object>
     <object>objects\ctrl_panel_o</object>
     <object>objects\hidrogen_slider_o</object>
+    <object>objects\helium_slider_o</object>
+    <object>objects\other_elems_slider_o</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>
