@@ -70,6 +70,7 @@
     <instance objName="neptune_o" x="288" y="32" name="inst_6255058E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="neptune_orbit_o" x="288" y="48" name="inst_8B435301" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="ctrl_panel_o" x="496" y="432" name="inst_0E1B9FFC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="hidrogen_slider_o" x="464" y="432" name="inst_4C221CA8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

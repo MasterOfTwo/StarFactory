@@ -130,24 +130,25 @@ if (instance_exists(target)) {
 global.camera_d = pan
 tilt += (window_mouse_get_y() - window_get_height() / 2) * rotspeed_y
 tilt = max(-89.9, min(89.9, tilt))*/
-
-if(mouse_check_button(mb_left)) {
-    pan += (mouse_x - x_mouse_init) * rotspeed_x;
-    global.camera_d = pan;
-    tilt += (mouse_y - y_mouse_init) * rotspeed_y
-    tilt = max(-89.9, min(89.9, tilt))
-}
-else {
-    x_mouse_init = mouse_x;
-    y_mouse_init = mouse_y;
-}
-
-if(mouse_wheel_down()) {
-    distance = distance + 100;
-}
-
-if(mouse_wheel_up()) {
-    distance = max(distance - 100, 50);
+if(!ctrl_panel_o.isOn){
+    if(mouse_check_button(mb_left)) {
+        pan += (mouse_x - x_mouse_init) * rotspeed_x;
+        global.camera_d = pan;
+        tilt += (mouse_y - y_mouse_init) * rotspeed_y
+        tilt = max(-89.9, min(89.9, tilt))
+    }
+    else {
+        x_mouse_init = mouse_x;
+        y_mouse_init = mouse_y;
+    }
+    
+    if(mouse_wheel_down()) {
+        distance = distance + 100;
+    }
+    
+    if(mouse_wheel_up()) {
+        distance = max(distance - 100, 50);
+    }
 }
 
 </string>

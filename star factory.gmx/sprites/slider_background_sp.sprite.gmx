@@ -2,24 +2,24 @@
 <sprite>
   <type>0</type>
   <xorig>0</xorig>
-  <yorigin>14</yorigin>
+  <yorigin>48</yorigin>
   <colkind>1</colkind>
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>0</bbox_left>
-  <bbox_right>119</bbox_right>
+  <bbox_right>159</bbox_right>
   <bbox_top>0</bbox_top>
-  <bbox_bottom>27</bbox_bottom>
+  <bbox_bottom>95</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>120</width>
-  <height>28</height>
+  <width>160</width>
+  <height>96</height>
   <frames>
-    <frame index="0">images\slider_track_sp_0.png</frame>
+    <frame index="0">images\slider_background_sp_0.png</frame>
   </frames>
 </sprite>

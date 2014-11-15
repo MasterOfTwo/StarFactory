@@ -10,12 +10,15 @@
     <sprite>sprites\ctrl_panel_sp</sprite>
     <sprite>sprites\slider_sp</sprite>
     <sprite>sprites\slider_track_sp</sprite>
+    <sprite>sprites\slider_background_sp</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\PlanetTranslation_src.gml</script>
     <script>scripts\OnPlanetCreation_src.gml</script>
+    <script>scripts\SliderDraw_src.gml</script>
+    <script>scripts\SliderMove_src.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\sun_o</object>
@@ -37,8 +40,7 @@
     <object>objects\saturn_orbit_o</object>
     <object>objects\neptune_orbit_o</object>
     <object>objects\ctrl_panel_o</object>
-    <object>objects\slider_track_o</object>
-    <object>objects\slider_o</object>
+    <object>objects\hidrogen_slider_o</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>

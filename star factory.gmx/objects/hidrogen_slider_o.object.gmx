@@ -25,45 +25,53 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>px=520
-py=456
-dcenter=24;
-isOn=0;
-sliderTrackX=18;
-sliderTrackY=-12;
-sliderButtonX=sliderTrackX+8;
-sliderButtonY=sliderTrackY;
-textX=24;
-textY=16;
+            <string>px=0
+py=64
+sliderPos=0;
+name="Hydrogen";
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>601</id>
+        <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <exetype>1</exetype>
+        <functionname>action_execute_script</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
-            <kind>1</kind>
-            <string>if(mouse_check_button_pressed(mb_left)){
-    mx=mouse_x;
-    my=mouse_y;
-    if(mx&gt;px-dcenter &amp;&amp; mx&lt;=px+dcenter &amp;&amp; my&gt;py-dcenter &amp;&amp; my&lt;=py+dcenter)
-        isOn=(isOn+1)%2;
-}
-</string>
+            <kind>9</kind>
+            <script>SliderMove_src</script>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -71,22 +79,41 @@ textY=16;
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>601</id>
+        <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <exetype>1</exetype>
+        <functionname>action_execute_script</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
-            <kind>1</kind>
-            <string>draw_sprite(ctrl_panel_sp, 0,px,py);
-</string>
+            <kind>9</kind>
+            <script>SliderDraw_src</script>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -103,8 +130,5 @@ textY=16;
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints>
-    <point>24,24</point>
-    <point>24,24</point>
-  </PhysicsShapePoints>
+  <PhysicsShapePoints/>
 </object>
