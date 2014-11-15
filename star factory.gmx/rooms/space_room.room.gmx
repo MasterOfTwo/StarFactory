@@ -69,6 +69,7 @@
     <instance objName="saturn_orbit_o" x="224" y="48" name="inst_02EBE90B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="neptune_o" x="288" y="32" name="inst_6255058E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="neptune_orbit_o" x="288" y="48" name="inst_8B435301" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="ctrl_panel_o" x="496" y="432" name="inst_0E1B9FFC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

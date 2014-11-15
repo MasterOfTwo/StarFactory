@@ -7,6 +7,9 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\sun_sprite</sprite>
+    <sprite>sprites\ctrl_panel_sp</sprite>
+    <sprite>sprites\slider_sp</sprite>
+    <sprite>sprites\slider_track_sp</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -33,6 +36,9 @@
     <object>objects\uranus_orbit_o</object>
     <object>objects\saturn_orbit_o</object>
     <object>objects\neptune_orbit_o</object>
+    <object>objects\ctrl_panel_o</object>
+    <object>objects\slider_track_o</object>
+    <object>objects\slider_o</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>
