@@ -25,6 +25,7 @@
     <script>scripts\SliderDraw_src.gml</script>
     <script>scripts\SliderMove_src.gml</script>
     <script>scripts\orbit_visibility_src.gml</script>
+    <script>scripts\OnPlanetDraw_src.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\sun_o</object>

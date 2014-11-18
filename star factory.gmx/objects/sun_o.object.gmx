@@ -97,7 +97,7 @@ alive=1;
             color=c_yellow;
         }
     }
-    radius*=1+((mLi2Fe/m)+(3*mHeavy/m));
+    radius*=1+((4*mLi2Fe/m)+(8*mHeavy/m));
 }
 </string>
           </argument>

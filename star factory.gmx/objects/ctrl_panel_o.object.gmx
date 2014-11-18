@@ -171,16 +171,14 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
         draw_text(520,120,string(turnsLeft)+" Turns Left");
     }else{
         draw_text(8,60,"Planet: "+camera_o.target.name);
-        draw_text(8,80,"Orbital Speed: "+camera_o.target.myspeed);
+        draw_text(8,80,"Orbital Speed: "+string(camera_o.target.myspeed));
     }
 }
 if(!updating){
     draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
-    if(!isOn){
-        draw_sprite_ext(orbit_sp,0,ox,oy,0.505631,0.505631,0,c_white,1);
-        draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
-        draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
-    }
+    draw_sprite_ext(orbit_sp,0,ox,oy,0.505631,0.505631,0,c_white,1);
+    draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
+    draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
 }
 if(gameOver){
     draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);

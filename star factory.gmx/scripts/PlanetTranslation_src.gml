@@ -1,4 +1,7 @@
 if(alive){
+    if(sun_o.radius+radius>=point_distance(x, y, sun_o.x, sun_o.y)){
+        alive=0;
+    }
     times = 1000;
     repeat(times) {
         r = point_distance(x, y, sun_o.x, sun_o.y); //distance between the sun and the planet
@@ -8,6 +11,7 @@ if(alive){
         orbit_speed = sqrt((G*sun_o.m)/r);
         
         v = orbit_speed / times ; //each second
+        myspeed=orbit_speed;
         
         x += lengthdir_x(v, dir-90);
         y += lengthdir_y(v, dir-90);
