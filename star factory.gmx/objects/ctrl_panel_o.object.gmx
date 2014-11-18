@@ -29,6 +29,7 @@
 py=456
 updating=0;
 dcenter=24;
+d2center=48;
 isOn=0;
 sliderTrackX=18;
 sliderTrackY=-12;
@@ -37,9 +38,12 @@ sliderButtonY=sliderTrackY;
 textX=8;
 textY=16;
 rot=0;
-
+turnsLeft=20;
 ppx=452;
 ppy=456;
+pgox=548;
+pgoy=428;
+gameOver=0;
 </string>
           </argument>
         </arguments>
@@ -79,7 +83,23 @@ if(updating){
     sun_o.mHe+=helium_slider_o.sliderPos/90;
     sun_o.mLi2Fe+=other_elems_slider_o.sliderPos/90;
     timer--;
-    if(timer&lt;=0) updating=(updating+1)%2;
+    if(timer&lt;=0){ 
+        updating=(updating+1)%2;
+        turnsLeft--;
+        if(turnsLeft&lt;=0 || sun_o.m&gt;=900){
+            isOn=0;
+            gameOver=1;
+        }
+    }
+}
+if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
+    mx=mouse_x;
+    my=mouse_y;
+    if(mx&gt;pgox-d2center &amp;&amp; mx&lt;=pgox+d2center &amp;&amp; my&gt;pgoy-dcenter &amp;&amp; my&lt;=pgoy+dcenter){
+        isOn=0;
+        gameOver=0;
+        room_restart();
+    }
 }
 </string>
           </argument>
@@ -114,6 +134,18 @@ if(updating){
     draw_text(16,200,"Heavy: "+string(sun_o.mHeavy/sun_o.m));
 }
 if(!updating)draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
+if(gameOver){
+    draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
+    draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
+    draw_text(16,60,"Game Over!");
+    if(sun_o.alive){
+        
+    }else{
+        draw_text(16,80,"You blew up the sun!");
+        draw_text(16,100,"0 Points");
+    }
+    draw_sprite(game_over_sp,0,pgox,pgoy);
+}
 </string>
           </argument>
         </arguments>

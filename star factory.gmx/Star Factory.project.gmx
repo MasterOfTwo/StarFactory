@@ -13,6 +13,7 @@
     <sprite>sprites\slider_background_sp</sprite>
     <sprite>sprites\gui_guard_sp</sprite>
     <sprite>sprites\play_sp</sprite>
+    <sprite>sprites\game_over_sp</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -45,6 +46,7 @@
     <object>objects\hidrogen_slider_o</object>
     <object>objects\helium_slider_o</object>
     <object>objects\other_elems_slider_o</object>
+    <object>objects\game_over_o</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>

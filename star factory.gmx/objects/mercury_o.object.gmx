@@ -30,6 +30,7 @@ x = target.x + 57 + 34.5;
 z = 0
 zspeed = 0
 zsize = 16 // size on Z axis
+alive=1;
 
 </string>
           </argument>
@@ -135,14 +136,15 @@ zsize = 16 // size on Z axis
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_navy)
-d3d_transform_set_identity()
-d3d_transform_add_translation(x+0,y+0,0)
-//2 440 radius
-d3d_draw_ellipsoid(-2,-2,-2,2,2,2,-1,1,1,20)
-d3d_transform_set_identity()
-draw_set_color(c_white)
-
+            <string>if(alive){
+    draw_set_color(c_navy)
+    d3d_transform_set_identity()
+    d3d_transform_add_translation(x+0,y+0,0)
+    //2 440 radius
+    d3d_draw_ellipsoid(-2,-2,-2,2,2,2,-1,1,1,20)
+    d3d_transform_set_identity()
+    draw_set_color(c_white)
+}
 </string>
           </argument>
         </arguments>

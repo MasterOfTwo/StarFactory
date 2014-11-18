@@ -41,6 +41,7 @@ facing = 0; // facing direction
 tfacing = 0; // target facing direction
 m=mH+mHe+mLi2Fe+mHeavy;
 radius=11.5;
+alive=1;
 </string>
           </argument>
         </arguments>
@@ -120,14 +121,16 @@ radius=11.5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(color)
-d3d_transform_set_identity()
-d3d_transform_add_translation(x+0,y+0,0)
-//695 800 radius
-d3d_draw_ellipsoid(-radius,-radius,-radius,radius,radius,radius,-1,1,1,20)
-//d3d_draw_ellipsoid(5,5,5,5,5,5,-1,1,1,20)
-d3d_transform_set_identity()
-draw_set_color(c_white)
+            <string>if(alive){
+    draw_set_color(color)
+    d3d_transform_set_identity()
+    d3d_transform_add_translation(x+0,y+0,0)
+    //695 800 radius
+    d3d_draw_ellipsoid(-radius,-radius,-radius,radius,radius,radius,-1,1,1,20)
+    //d3d_draw_ellipsoid(5,5,5,5,5,5,-1,1,1,20)
+    d3d_transform_set_identity()
+    draw_set_color(c_white)
+}
 
 </string>
           </argument>
