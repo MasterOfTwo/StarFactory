@@ -44,6 +44,13 @@ ppy=456;
 pgox=548;
 pgoy=428;
 gameOver=0;
+
+leftx=404;
+lefty=456;
+rightx=356;
+righty=456;
+ox=308;
+oy=456;
 </string>
           </argument>
         </arguments>
@@ -76,6 +83,34 @@ gameOver=0;
     if(isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
         updating=(updating+1)%2;
         timer=90;
+    }
+    if(mx&gt;ox-dcenter &amp;&amp; mx&lt;=ox+dcenter &amp;&amp; my&gt;oy-dcenter &amp;&amp; my&lt;=oy+dcenter){
+        script_execute(orbit_visibility_src,mercury_orbit_o);
+        script_execute(orbit_visibility_src,venus_orbit_o);
+        script_execute(orbit_visibility_src,earth_orbit_o);
+        script_execute(orbit_visibility_src,mars_orbit_o);
+        script_execute(orbit_visibility_src,jupiter_orbit_o);
+        script_execute(orbit_visibility_src,saturn_orbit_o);
+        script_execute(orbit_visibility_src,uranus_orbit_o);
+        script_execute(orbit_visibility_src,neptune_orbit_o);
+    }
+    if(mx&gt;leftx-dcenter &amp;&amp; mx&lt;=leftx+dcenter &amp;&amp; my&gt;lefty-dcenter &amp;&amp; my&lt;=lefty+dcenter){
+        if(camera_o.index &gt; 7) {
+            camera_o.index = 0;
+        }
+        else {
+            camera_o.index = camera_o.index + 1;
+        }
+        camera_o.target = camera_o.targets[camera_o.index];
+    }
+    if(mx&gt;rightx-dcenter &amp;&amp; mx&lt;=rightx+dcenter &amp;&amp; my&gt;righty-dcenter &amp;&amp; my&lt;=righty+dcenter){
+        if(camera_o.index &lt; 1) {
+            camera_o.index = 8;
+        }
+        else {
+            camera_o.index = camera_o.index - 1;
+        }
+        camera_o.target = camera_o.targets[camera_o.index];
     }
 }
 if(updating){
@@ -127,19 +162,79 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
     draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
     draw_sprite(play_sp,0,ppx,ppy);
-    draw_text(16,120,"Mass: "+string(sun_o.m));
-    draw_text(16,140,"Hydrogen: "+string(sun_o.mH/sun_o.m));
-    draw_text(16,160,"Helium: "+string(sun_o.mHe/sun_o.m));
-    draw_text(16,180,"Li - Fe: "+string(sun_o.mLi2Fe/sun_o.m));
-    draw_text(16,200,"Heavy: "+string(sun_o.mHeavy/sun_o.m));
+    if(camera_o.target==sun_o){
+        draw_text(8,120,"Mass: "+string(sun_o.m));
+        draw_text(8,140,"Hydrogen: "+string((sun_o.mH/sun_o.m)*100)+"%");
+        draw_text(8,160,"Helium: "+string((sun_o.mHe/sun_o.m)*100)+"%");
+        draw_text(8,180,"Li - Fe: "+string((sun_o.mLi2Fe/sun_o.m)*100)+"%");
+        draw_text(8,200,"Heavy: "+string((sun_o.mHeavy/sun_o.m)*100)+"%");
+        draw_text(520,120,string(turnsLeft)+" Turns Left");
+    }else{
+        draw_text(8,60,"Planet: "+camera_o.target.name);
+        draw_text(8,80,"Orbital Speed: "+camera_o.target.myspeed);
+    }
 }
-if(!updating)draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
+if(!updating){
+    draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
+    if(!isOn){
+        draw_sprite_ext(orbit_sp,0,ox,oy,0.505631,0.505631,0,c_white,1);
+        draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
+        draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
+    }
+}
 if(gameOver){
     draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
-    draw_text(16,60,"Game Over!");
+    draw_text(8,60,"Game Over!");
     if(sun_o.alive){
-        
+        points=0;
+        if(mercury_o.alive){
+            points+=1000;
+            draw_text(8,80,"Mercury: 1000");
+        }
+        else draw_text(8,80,"Mercury was destroyed!");
+        if(venus_o.alive){
+            points+=1000;
+            draw_text(8,100,"Venus: 1000");
+        }
+        else draw_text(8,100,"Venus was destroyed!");
+        if(earth_o.alive){
+            points+=3000;
+            draw_text(8,120,"Earth: 3000");
+        }
+        else draw_text(8,120,"Earth was destroyed!");
+        if(mars_o.alive){
+            points+=1000;
+            draw_text(8,140,"Mars: 1000");
+        }
+        else draw_text(8,140,"Mars was destroyed!");
+        if(jupiter_o.alive){
+            points+=1000;
+            draw_text(8,160,"Jupiter: 1000");
+        }
+        else draw_text(8,160,"Jupiter was destroyed!");
+        if(saturn_o.alive){
+            points+=1000;
+            draw_text(8,180,"Saturn: 1000");
+        }
+        else draw_text(8,180,"Saturn was destroyed!");
+        if(uranus_o.alive){
+            points+=1000;
+            draw_text(8,200,"Uranus: 1000");
+        }
+        else draw_text(8,200,"Uranus was destroyed!");
+        if(neptune_o.alive){
+            points+=1000;
+            draw_text(8,220,"Neptune: 1000");
+        }
+        else draw_text(8,220,"Neptune was destroyed!");
+        if(sun_o.mH/sun_o.m&lt;=0.8 &amp;&amp; sun_o.mH/sun_o.m&gt;=0.2){
+            points+=1000;
+            draw_text(8,240,"Extra Points for temperature! +1000");
+            draw_text(8,260,"Final Score: "+string(points));
+        }else{
+            draw_text(8,240,"Final Score: "+string(points));
+        }
     }else{
         draw_text(16,80,"You blew up the sun!");
         draw_text(16,100,"0 Points");
