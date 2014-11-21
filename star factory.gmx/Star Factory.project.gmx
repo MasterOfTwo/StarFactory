@@ -26,31 +26,36 @@
     <script>scripts\SliderMove_src.gml</script>
     <script>scripts\orbit_visibility_src.gml</script>
     <script>scripts\OnPlanetDraw_src.gml</script>
+    <script>scripts\PlanetOrbitDraw_src.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\sun_o</object>
     <object>objects\camera_o</object>
-    <object>objects\mercury_o</object>
-    <object>objects\venus_o</object>
-    <object>objects\earth_o</object>
-    <object>objects\mars_o</object>
-    <object>objects\jupiter_o</object>
-    <object>objects\uranus_o</object>
-    <object>objects\saturn_o</object>
-    <object>objects\neptune_o</object>
-    <object>objects\mercury_orbit_o</object>
-    <object>objects\venus_orbit_o</object>
-    <object>objects\earth_orbit_o</object>
-    <object>objects\mars_orbit_o</object>
-    <object>objects\jupiter_orbit_o</object>
-    <object>objects\uranus_orbit_o</object>
-    <object>objects\saturn_orbit_o</object>
-    <object>objects\neptune_orbit_o</object>
     <object>objects\ctrl_panel_o</object>
     <object>objects\hidrogen_slider_o</object>
     <object>objects\helium_slider_o</object>
     <object>objects\other_elems_slider_o</object>
     <object>objects\game_over_o</object>
+    <objects name="planets">
+      <object>objects\mercury_o</object>
+      <object>objects\venus_o</object>
+      <object>objects\earth_o</object>
+      <object>objects\mars_o</object>
+      <object>objects\jupiter_o</object>
+      <object>objects\uranus_o</object>
+      <object>objects\saturn_o</object>
+      <object>objects\neptune_o</object>
+    </objects>
+    <objects name="planets_orbits">
+      <object>objects\mercury_orbit_o</object>
+      <object>objects\venus_orbit_o</object>
+      <object>objects\earth_orbit_o</object>
+      <object>objects\mars_orbit_o</object>
+      <object>objects\jupiter_orbit_o</object>
+      <object>objects\saturn_orbit_o</object>
+      <object>objects\uranus_orbit_o</object>
+      <object>objects\neptune_orbit_o</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>

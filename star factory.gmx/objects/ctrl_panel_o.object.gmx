@@ -30,7 +30,7 @@ py=456
 updating=0;
 dcenter=24;
 d2center=48;
-isOn=0;
+isOn=1;
 sliderTrackX=18;
 sliderTrackY=-12;
 sliderButtonX=sliderTrackX+8;
@@ -100,16 +100,35 @@ oy=456;
         }
         else {
             camera_o.index = camera_o.index + 1;
+            
+            while(camera_o.targets[camera_o.index].alive == 0) {
+                if(camera_o.index == 8) {
+                    camera_o.index = 0;
+                }
+                else {
+                    camera_o.index = camera_o.index + 1;
+                } 
+            }
         }
+      
         camera_o.target = camera_o.targets[camera_o.index];
     }
     if(mx&gt;rightx-dcenter &amp;&amp; mx&lt;=rightx+dcenter &amp;&amp; my&gt;righty-dcenter &amp;&amp; my&lt;=righty+dcenter){
         if(camera_o.index &lt; 1) {
             camera_o.index = 8;
+            
+            while(camera_o.targets[camera_o.index].alive == 0) {
+                camera_o.index = camera_o.index - 1;
+            }
         }
         else {
             camera_o.index = camera_o.index - 1;
+             
+            while(camera_o.targets[camera_o.index].alive == 0) {
+                camera_o.index = camera_o.index - 1;
+            }
         }
+        
         camera_o.target = camera_o.targets[camera_o.index];
     }
 }
