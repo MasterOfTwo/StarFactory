@@ -42,6 +42,7 @@ tfacing = 0; // target facing direction
 m=mH+mHe+mLi2Fe+mHeavy;
 radius=11.5;
 alive=1;
+temperature=17000;
 </string>
           </argument>
         </arguments>
@@ -97,6 +98,7 @@ if(mH/m&gt;=0.8){
     }
 }
 radius*=1+((4*mLi2Fe/m)+(8*mHeavy/m));
+temperature=156250*power(mH/m,4)-250000*power(mH/m,3)+118750*power(mH/m,2)-10000*(mH/m)+2000;
 if((mH+mHe)/m&lt;(mLi2Fe+mHeavy)/m){
     alive=0;
     ctrl_panel_o.gameOver=1;
