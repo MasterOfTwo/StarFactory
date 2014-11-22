@@ -56,6 +56,7 @@
       <object>objects\uranus_orbit_o</object>
       <object>objects\neptune_orbit_o</object>
     </objects>
+    <object>objects\coin_purse_o</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>

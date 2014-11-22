@@ -80,8 +80,10 @@ oy=456;
         rot=(rot+180)%360;
     }
     if(!updating &amp;&amp; isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
-        updating=(updating+1)%2;
-        timer=90;
+        if(coin_purse_o.coins&gt;=3*(hidrogen_slider_o.sliderPos/90)+helium_slider_o.sliderPos/90){
+            updating=(updating+1)%2;
+            timer=90;
+        }
     }
     if(mx&gt;ox-dcenter &amp;&amp; mx&lt;=ox+dcenter &amp;&amp; my&gt;oy-dcenter &amp;&amp; my&lt;=oy+dcenter){
         script_execute(orbit_visibility_src,mercury_orbit_o);
@@ -135,6 +137,7 @@ if(updating){
     sun_o.mH+=hidrogen_slider_o.sliderPos/90;
     sun_o.mHe+=helium_slider_o.sliderPos/90;
     sun_o.mLi2Fe+=other_elems_slider_o.sliderPos/90;
+    coin_purse_o.coins-=3*(hidrogen_slider_o.sliderPos/90)+helium_slider_o.sliderPos/90;
     timer--;
     if(!gameOver &amp;&amp; timer&lt;=0){ 
         updating=(updating+1)%2;
