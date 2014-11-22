@@ -130,7 +130,7 @@ if((mH+mHe)/m&lt;(mLi2Fe+mHeavy)/m){
     d3d_transform_set_identity()
     d3d_transform_add_translation(x+0,y+0,0)
     //695 800 radius
-    d3d_draw_ellipsoid(-radius,-radius,-radius,radius,radius,radius,-1,1,1,20)
+    d3d_draw_ellipsoid(-radius,-radius,-radius,radius,radius,radius,sprite_get_texture(sun_sp, 0),1,1,20)
     //d3d_draw_ellipsoid(5,5,5,5,5,5,-1,1,1,20)
     d3d_transform_set_identity()
     draw_set_color(c_white)

@@ -6,7 +6,6 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sun_sprite</sprite>
     <sprite>sprites\ctrl_panel_sp</sprite>
     <sprite>sprites\slider_sp</sprite>
     <sprite>sprites\slider_track_sp</sprite>
@@ -19,6 +18,7 @@
     <sprite>sprites\pause_restart_sp</sprite>
     <sprite>sprites\pause_resume_sp</sprite>
     <sprite>sprites\pause_background_sp</sprite>
+    <sprite>sprites\sun_sp</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>

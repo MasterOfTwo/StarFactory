@@ -1,6 +1,7 @@
 if(alive){
     if(sun_o.radius+radius>=point_distance(x, y, sun_o.x, sun_o.y)){
         alive=0;
+        global.planets -= 1;
     }
     times = 1000;
     repeat(times) {
