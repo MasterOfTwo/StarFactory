@@ -38,7 +38,6 @@ sliderButtonY=sliderTrackY;
 textX=8;
 textY=16;
 rot=0;
-turnsLeft=20;
 ppx=452;
 ppy=456;
 pgox=548;
@@ -137,14 +136,14 @@ if(updating){
     sun_o.mHe+=helium_slider_o.sliderPos/90;
     sun_o.mLi2Fe+=other_elems_slider_o.sliderPos/90;
     timer--;
-    if(timer&lt;=0){ 
+    if(!gameOver &amp;&amp; timer&lt;=0){ 
         updating=(updating+1)%2;
-        turnsLeft--;
-        if(turnsLeft&lt;=0 || sun_o.m&gt;=900){
+        if(sun_o.m&gt;=900){
             isOn=0;
             gameOver=1;
         }
     }
+    if(gameOver) isOn=0;
 }
 if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
     mx=mouse_x;
@@ -177,7 +176,7 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(isOn){
+            <string>if(isOn &amp;&amp; !gameOver){
     draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
     if(!updating) draw_sprite(play_sp,0,ppx,ppy);
@@ -187,17 +186,11 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
         draw_text(8,160,"Helium: "+string((sun_o.mHe/sun_o.m)*100)+"%");
         draw_text(8,180,"Li - Fe: "+string((sun_o.mLi2Fe/sun_o.m)*100)+"%");
         draw_text(8,200,"Heavy: "+string((sun_o.mHeavy/sun_o.m)*100)+"%");
-        draw_text(520,120,string(turnsLeft)+" Turns Left");
     }else{
         draw_text(8,60,"Planet: "+camera_o.target.name);
         draw_text(8,80,"Orbital Speed: "+string(camera_o.target.myspeed));
     }
 }
-
-draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
-draw_sprite_ext(orbit_sp,0,ox,oy,0.505631,0.505631,0,c_white,1);
-draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
-draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
 
 if(gameOver){
     draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
@@ -257,6 +250,11 @@ if(gameOver){
         draw_text(16,100,"0 Points");
     }
     draw_sprite(game_over_sp,0,pgox,pgoy);
+}else{
+    draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
+    draw_sprite_ext(orbit_sp,0,ox,oy,0.505631,0.505631,0,c_white,1);
+    draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
+    draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
 }
 </string>
           </argument>

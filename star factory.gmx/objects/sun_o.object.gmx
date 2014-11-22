@@ -97,7 +97,10 @@ if(mH/m&gt;=0.8){
     }
 }
 radius*=1+((4*mLi2Fe/m)+(8*mHeavy/m));
-
+if((mH+mHe)/m&lt;(mLi2Fe+mHeavy)/m){
+    alive=0;
+    ctrl_panel_o.gameOver=1;
+}
 </string>
           </argument>
         </arguments>

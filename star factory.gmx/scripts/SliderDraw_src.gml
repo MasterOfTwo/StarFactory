@@ -1,4 +1,4 @@
-if(ctrl_panel_o.isOn && !ctrl_panel_o.updating && camera_o.target==sun_o){
+if(ctrl_panel_o.isOn && !ctrl_panel_o.updating && camera_o.target==sun_o && !ctrl_panel_o.gameOver){
     draw_sprite(slider_background_sp,0,px,py);
     draw_sprite(slider_track_sp,0,px+ctrl_panel_o.sliderTrackX,py+ctrl_panel_o.sliderTrackY);
     draw_sprite(slider_sp,0,px+ctrl_panel_o.sliderButtonX+sliderPos,py+ctrl_panel_o.sliderButtonY);
