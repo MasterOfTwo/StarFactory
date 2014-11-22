@@ -16,6 +16,9 @@
     <sprite>sprites\game_over_sp</sprite>
     <sprite>sprites\orbit_sp</sprite>
     <sprite>sprites\left_sp</sprite>
+    <sprite>sprites\pause_restart_sp</sprite>
+    <sprite>sprites\pause_resume_sp</sprite>
+    <sprite>sprites\pause_background_sp</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -57,6 +60,7 @@
       <object>objects\neptune_orbit_o</object>
     </objects>
     <object>objects\coin_purse_o</object>
+    <object>objects\pause_menu_o</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>
