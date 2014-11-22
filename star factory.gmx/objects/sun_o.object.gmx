@@ -64,41 +64,40 @@ alive=1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(ctrl_panel_o.updating){
-    m=mH+mHe+mLi2Fe+mHeavy;
-    radius=11.5+(m-100)*0.115*(1/3);
-    if(mH/m&gt;=0.8){
-        //azul
-        mHdiff=min(mH,m*0.015*(mH/m)/90);
+            <string>m=mH+mHe+mLi2Fe+mHeavy;
+radius=11.5+(m-100)*0.115*(1/3);
+if(mH/m&gt;=0.8){
+    //azul
+    mHdiff=min(mH,m*0.015*(mH/m)/90);
+    mH-=mHdiff;
+    mHe+=mHdiff;
+    color=c_aqua;
+}else{
+    if(mH/m&lt;0.2){
+        //vermelha
+        mHdiff=min(mH,m*0.004*(mH/m)/90);
         mH-=mHdiff;
         mHe+=mHdiff;
-        color=c_aqua;
+        mHediff=min(mHe,m*0.037*(mHe/m)/90);
+        mHe-=mHediff;
+        mLi2Fe+=mHediff;
+        mLi2Fediff=min(mLi2Fe,m*0.06*(mLi2Fe/m)/90);
+        mLi2Fe-=mLi2Fediff;
+        mHeavy+=mLi2Fediff;      
+        color=c_orange;
     }else{
-        if(mH/m&lt;0.2){
-            //vermelha
-            mHdiff=min(mH,m*0.0004*(mH/m)/90);
-            mH-=mHdiff;
-            mHe+=mHdiff;
-            mHediff=min(mHe,m*0.0037*(mHe/m)/90);
-            mHe-=mHdiff;
-            mLi2Fe+=mHdiff;
-            mLi2Fediff=min(mLi2Fe,m*0.06*(mLi2Fe/m)/90);
-            mLi2Fe-=mLi2Fediff;
-            mHeavy+=mLi2Fediff;      
-            color=c_orange;
-        }else{
-            //amarela
-            mHdiff=min(mH,m*0.008*(mH/m)/90);
-            mH-=mHdiff;
-            mHe+=mHdiff;
-            mHediff=min(mHe,m*0.003*(mHe/m)/90);
-            mHe-=mHdiff;
-            mLi2Fe+=mHdiff;
-            color=c_yellow;
-        }
+        //amarela
+        mHdiff=min(mH,m*0.007*(mH/m)/90);
+        mH-=mHdiff;
+        mHe+=mHdiff;
+        mHediff=min(mHe,m*0.004*(mHe/m)/90);
+        mHe-=mHediff;
+        mLi2Fe+=mHediff;
+        color=c_yellow;
     }
-    radius*=1+((4*mLi2Fe/m)+(8*mHeavy/m));
 }
+radius*=1+((4*mLi2Fe/m)+(8*mHeavy/m));
+
 </string>
           </argument>
         </arguments>

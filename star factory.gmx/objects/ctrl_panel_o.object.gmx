@@ -73,14 +73,14 @@ oy=456;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(!updating &amp;&amp; mouse_check_button_pressed(mb_left)){
+            <string>if(mouse_check_button_pressed(mb_left)){
     mx=mouse_x;
     my=mouse_y;
     if(mx&gt;px-dcenter &amp;&amp; mx&lt;=px+dcenter &amp;&amp; my&gt;py-dcenter &amp;&amp; my&lt;=py+dcenter){
         isOn=(isOn+1)%2;
         rot=(rot+180)%360;
     }
-    if(isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
+    if(!updating &amp;&amp; isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
         updating=(updating+1)%2;
         timer=90;
     }
@@ -177,10 +177,10 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(isOn &amp;&amp; !updating){
+            <string>if(isOn){
     draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
-    draw_sprite(play_sp,0,ppx,ppy);
+    if(!updating) draw_sprite(play_sp,0,ppx,ppy);
     if(camera_o.target==sun_o){
         draw_text(8,120,"Mass: "+string(sun_o.m));
         draw_text(8,140,"Hydrogen: "+string((sun_o.mH/sun_o.m)*100)+"%");
@@ -193,12 +193,12 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
         draw_text(8,80,"Orbital Speed: "+string(camera_o.target.myspeed));
     }
 }
-if(!updating){
-    draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
-    draw_sprite_ext(orbit_sp,0,ox,oy,0.505631,0.505631,0,c_white,1);
-    draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
-    draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
-}
+
+draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
+draw_sprite_ext(orbit_sp,0,ox,oy,0.505631,0.505631,0,c_white,1);
+draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
+draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
+
 if(gameOver){
     draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
