@@ -74,6 +74,7 @@
     <instance objName="uranus_orbit_o" x="256" y="48" name="inst_01E93C3A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="neptune_orbit_o" x="288" y="48" name="inst_809BC7F7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="coin_purse_o" x="480" y="448" name="inst_2B8DF6EC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objectives_text_o" x="496" y="448" name="inst_7C1BF494" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
