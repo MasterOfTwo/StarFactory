@@ -55,12 +55,12 @@ py=180;
     draw_set_colour(c_aqua);
     
     if (camera_o.target==sun_o) {        
-        draw_text(640, 160, "Make Sun's mass#reach 900"); 
+        draw_text(640, 160, "Get the#Sun to#900Mt"); 
         draw_set_colour(c_orange);
-        draw_text(640, 200, "A planet in this system#has a bonus objective!");
+        draw_text(640, 220, "A planet in#this system#has a bonus#objective!");
         draw_set_colour(c_aqua);
     } else if (camera_o.target==earth_o) {
-        draw_text(640, 160, "Make Earth's temperature# stay at 4000-5000");
+        draw_text(640, 160, "This planet#can support#life if the#Star's temperature#stays between#4800k and 5200k");
     }
     draw_set_colour(c_white);
     draw_set_halign(fa_left);

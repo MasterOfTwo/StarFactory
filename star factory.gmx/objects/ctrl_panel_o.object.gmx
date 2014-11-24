@@ -231,7 +231,7 @@ if(gameOver){
         planet_points = planets*1000;
         points += planet_points;
         draw_text(8, 80, string_format(planets, 1, 0) + " Planets survived: " + string_format(planet_points, 0, 0) + " Points");
-        if(sun_o.temperature &gt; 4899 &amp;&amp; sun_o.temperature &lt; 5101) {
+        if(sun_o.temperature &gt;= 4800 &amp;&amp; sun_o.temperature &lt;= 5200) {
             points += 2000;
             draw_text(8, 100, "Life on Earth: 2000 Points");
         }
@@ -239,13 +239,7 @@ if(gameOver){
             points += 2 * coin_purse_o.coins;
             draw_text(8, 100, "Coins saved: " + string_format(coin_purse_o.coins, 0, 0) + " Points");
         }
-        if(sun_o.mH/sun_o.m&lt;=0.8 &amp;&amp; sun_o.mH/sun_o.m&gt;=0.2){
-            points+=1000;
-            draw_text(8,240,"Extra Points for temperature! +1000");
-            draw_text(8,260,"Final Score: "+string(points) + " Points");
-        }else{
-            draw_text(8,240,"Final Score: "+string(points) + " Points");
-        }
+        draw_text(8,240,"Final Score: "+string(points) + " Points");
     }else{
         draw_text(8,80,"You blew up the sun!");
         draw_text(8,100,"Final Score: 0 Points");
