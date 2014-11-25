@@ -143,7 +143,7 @@ if(updating){
     timer--;
     if(!gameOver &amp;&amp; timer&lt;=0){ 
         updating=(updating+1)%2;
-        if(sun_o.m&gt;=900){
+        if(sun_o.m&gt;=897.0){
             isOn=0;
             planets = global.planets;
             gameOver=1;
@@ -210,7 +210,7 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
     draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
     if(!updating) draw_sprite(play_sp,0,ppx,ppy);
     if(camera_o.target==sun_o){
-        draw_text(8,120,"Mass: "+string_format(sun_o.m, 3, 2));
+        draw_text(8,120,"Mass: "+string_format(sun_o.m, 3, 2)+"Mt");
         draw_text(8,140,"Hydrogen: "+string_format((sun_o.mH/sun_o.m)*100, 3, 2)+"%");
         draw_text(8,160,"Helium: "+string_format((sun_o.mHe/sun_o.m)*100, 3, 2)+"%");
         draw_text(8,180,"Li - Fe: "+string_format((sun_o.mLi2Fe/sun_o.m)*100, 3, 2)+"%");
