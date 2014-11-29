@@ -32,8 +32,8 @@ zspeed = 0
 zsize = 16 // size on Z axis
 alive=1;
 name="Mercury";
-radius=2;
-color=c_maroon;
+radius=2*1.5;
+color=c_red;
 </string>
           </argument>
         </arguments>

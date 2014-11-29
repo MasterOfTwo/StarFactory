@@ -50,12 +50,12 @@ coins=1200;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(ctrl_panel_o.isOn &amp;&amp; !ctrl_panel_o.updating &amp;&amp; camera_o.target==sun_o &amp;&amp; !ctrl_panel_o.gameOver){
+            <string>/*if(ctrl_panel_o.isOn &amp;&amp; !ctrl_panel_o.updating &amp;&amp; camera_o.target==sun_o &amp;&amp; !ctrl_panel_o.gameOver){
     draw_sprite(slider_background_sp,0,px,py);
     draw_text(px+ctrl_panel_o.textX,py+ctrl_panel_o.textY-40,string_format(abs(coins), 3, 0)+" Coins Left");
     cost=3*hidrogen_slider_o.sliderPos+helium_slider_o.sliderPos;
     draw_text(px+ctrl_panel_o.textX,py+ctrl_panel_o.textY-20,"Cost: "+string_format(cost, 3, 0)+"C");
-}
+}*/
 </string>
           </argument>
         </arguments>

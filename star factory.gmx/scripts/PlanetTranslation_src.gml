@@ -3,7 +3,7 @@ if(alive){
         alive=0;
         global.planets -= 1;
     }
-    times = 1000;
+    times = 100;
     repeat(times) {
         r = point_distance(x, y, sun_o.x, sun_o.y); //distance between the sun and the planet
         dir = point_direction(x, y, sun_o.x, sun_o.y); //direction between the sun and the planet in degrees

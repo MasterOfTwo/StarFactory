@@ -36,8 +36,8 @@ facing = 0 // facing direction
 tfacing = 0 // target facing direction
 alive=1;
 name="Mars";
-radius=1.5;
-color=c_red;
+radius=2*2;
+color=c_maroon;
 </string>
           </argument>
         </arguments>

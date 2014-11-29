@@ -26,9 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>px=0
-py=414
+py=172
 sliderPos=0;
-name="Helium";
+name="Hellium";
+stored=200;
 </string>
           </argument>
         </arguments>

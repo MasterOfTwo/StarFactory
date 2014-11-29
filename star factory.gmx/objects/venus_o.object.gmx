@@ -36,7 +36,7 @@ facing = 0 // facing direction
 tfacing = 0 // target facing direction
 alive=1;
 name="Venus";
-radius=3;
+radius=2*3;
 color=c_olive;
 </string>
           </argument>

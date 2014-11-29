@@ -59,22 +59,14 @@
     <instance objName="venus_orbit_o" x="96" y="48" name="inst_4E2E7075" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="earth_o" x="128" y="32" name="inst_47312435" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="mars_o" x="160" y="32" name="inst_3DD0913A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="jupiter_o" x="192" y="32" name="inst_DD82991C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="uranus_o" x="256" y="32" name="inst_F62A3CFA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="saturn_o" x="224" y="32" name="inst_096EA1CB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="neptune_o" x="288" y="32" name="inst_6255058E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objectives_text_o" x="496" y="448" name="inst_7C1BF494" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="mars_orbit_o" x="160" y="48" name="inst_6ED9A99E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="coin_purse_o" x="480" y="448" name="inst_2B8DF6EC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="earth_orbit_o" x="128" y="48" name="inst_CE95E136" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="ctrl_panel_o" x="496" y="432" name="inst_0E1B9FFC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="hidrogen_slider_o" x="464" y="432" name="inst_4C221CA8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="helium_slider_o" x="464" y="448" name="inst_14288BE4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="other_elems_slider_o" x="480" y="432" name="inst_B964EDA8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="earth_orbit_o" x="128" y="48" name="inst_CE95E136" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="mars_orbit_o" x="160" y="48" name="inst_6ED9A99E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="jupiter_orbit_o" x="192" y="48" name="inst_2832783F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="saturn_orbit_o" x="224" y="48" name="inst_0BCD122B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="uranus_orbit_o" x="256" y="48" name="inst_01E93C3A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="neptune_orbit_o" x="288" y="48" name="inst_809BC7F7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="coin_purse_o" x="480" y="448" name="inst_2B8DF6EC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objectives_text_o" x="496" y="448" name="inst_7C1BF494" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

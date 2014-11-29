@@ -25,10 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>px=640-160;
-py=64
+            <string>px=0;
+py=280
 sliderPos=0;
-name="Li - Fe";
+name="Li through Fe";
+stored=600;
 </string>
           </argument>
         </arguments>
