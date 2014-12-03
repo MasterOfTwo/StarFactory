@@ -38,6 +38,7 @@ alive=1;
 name="Earth";
 radius=2*3;
 color=c_green;
+m = 10;
 </string>
           </argument>
         </arguments>
