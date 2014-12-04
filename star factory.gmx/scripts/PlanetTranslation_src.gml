@@ -2,19 +2,7 @@ if(alive){
     if(sun_o.radius+radius>=point_distance(x, y, sun_o.x, sun_o.y)){
         alive=0;
         global.planets -= 1;
-    }
-    /*
-     * PERFECT CIRCLE ORBITS
-     *
-    orbit_speed = sqrt((G*sun_o.m)/r);
-    
-    myspeed=orbit_speed;
-    dir += orbit_speed;
-    
-    x = lengthdir_x(r, dir) + sun_o.x;
-    y = lengthdir_y(r, dir) + sun_o.y;
-    */
-    
+    }    
     r = point_distance(x, y, sun_o.x, sun_o.y); //distance between the sun and the planet
         
     r2 = power(x, 2) + power(y, 2);
@@ -28,7 +16,15 @@ if(alive){
     ay = - ((G * sun_o.m) / r3) * y;
     
     vx += ax;
-    vy += ay;     
+    vy += ay;
+    
+    for(i = saved_pos - 1; i > 0; i--) {
+        prev_x[i] = prev_x[i - 1];
+        prev_y[i] = prev_y[i - 1];
+    }
+    
+    prev_x[0] = x;
+    prev_y[0] = y;     
     
     x += vx;
     y += vy;
