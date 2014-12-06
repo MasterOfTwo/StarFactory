@@ -38,7 +38,6 @@ alive=1;
 name="Venus";
 radius=2*3;
 color=c_olive;
-saved_pos = 110;
 </string>
           </argument>
         </arguments>

@@ -27,15 +27,15 @@
             <kind>1</kind>
             <string>index = 0;
 
-targets[0] = sun_o
-targets[1] = mercury_o
-targets[2] = venus_o
-targets[3] = earth_o
-targets[4] = mars_o
-targets[5] = jupiter_o
-targets[6] = saturn_o
-targets[7] = uranus_o
-targets[8] = neptune_o
+if(instance_exists(sun_o)) targets[0] = sun_o;
+if(instance_exists(mercury_o)) targets[1] = mercury_o;
+if(instance_exists(venus_o)) targets[2] = venus_o;
+if(instance_exists(earth_o)) targets[3] = earth_o;
+if(instance_exists(mars_o)) targets[4] = mars_o;
+if(instance_exists(jupiter_o)) targets[5] = jupiter_o;
+if(instance_exists(saturn_o)) targets[6] = saturn_o;
+if(instance_exists(uranus_o)) targets[7] = uranus_o;
+if(instance_exists(neptune_o)) targets[8] = neptune_o;
 
 target = targets[index];
 pan = 0
@@ -226,12 +226,22 @@ d3d_set_projection(
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(index &gt; 7) {
+            <string>if(index &gt; array_length_1d(targets) - 2) {
     index = 0;
 }
 else {
     index = index + 1;
+    
+    while(targets[index].alive == 0) {
+        if(index == array_length_1d(targets) - 1) {
+            index = 0;
+        }
+        else {
+            index = index + 1;
+        } 
+    }
 }
+
 target = targets[index];
 </string>
           </argument>
@@ -256,11 +266,20 @@ target = targets[index];
           <argument>
             <kind>1</kind>
             <string>if(index &lt; 1) {
-    index = 8;
+    index = array_length_1d(targets) - 1;
+    
+    while(targets[index].alive == 0) {
+        index = index - 1;
+    }
 }
 else {
     index = index - 1;
+     
+    while(targets[index].alive == 0) {
+        index = index - 1;
+    }
 }
+
 target = targets[index];
 </string>
           </argument>

@@ -38,7 +38,6 @@ alive=1;
 name="Mars";
 radius=2*2;
 color=c_maroon;
-saved_pos = 150;
 </string>
           </argument>
         </arguments>

@@ -27,7 +27,6 @@
     <script>scripts\OnPlanetCreation_src.gml</script>
     <script>scripts\SliderDraw_src.gml</script>
     <script>scripts\SliderMove_src.gml</script>
-    <script>scripts\orbit_visibility_src.gml</script>
     <script>scripts\OnPlanetDraw_src.gml</script>
     <script>scripts\PlanetOrbitDraw_src.gml</script>
     <script>scripts\CreateTrail.gml</script>
@@ -50,16 +49,6 @@
       <object>objects\uranus_o</object>
       <object>objects\saturn_o</object>
       <object>objects\neptune_o</object>
-    </objects>
-    <objects name="planets_orbits">
-      <object>objects\mercury_orbit_o</object>
-      <object>objects\venus_orbit_o</object>
-      <object>objects\earth_orbit_o</object>
-      <object>objects\mars_orbit_o</object>
-      <object>objects\jupiter_orbit_o</object>
-      <object>objects\saturn_orbit_o</object>
-      <object>objects\uranus_orbit_o</object>
-      <object>objects\neptune_orbit_o</object>
     </objects>
     <object>objects\coin_purse_o</object>
     <object>objects\pause_menu_o</object>

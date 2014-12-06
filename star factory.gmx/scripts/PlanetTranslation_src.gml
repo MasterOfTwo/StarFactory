@@ -4,7 +4,26 @@ if(alive){
         global.planets -= 1;
     }    
     r = point_distance(x, y, sun_o.x, sun_o.y); //distance between the sun and the planet
-        
+    dir[1] = dir[0];
+    dir[0] = point_direction(x, y, sun_o.x, sun_o.y); //direction between the sun and the planet in degrees
+    
+    if(!ctrl_panel_o.updatePlanetDirection) {
+        canChangeTrail = true;
+    }
+    
+    if(ctrl_panel_o.updatePlanetDirection && canChangeTrail) {
+        change_trail++;
+        canChangeTrail = false;    
+    }
+    
+    if(change_trail == 1) {
+        starting_dir = dir[0];
+        saved_pos = 1;
+        fullTranslation = false;
+        change_trail--;
+        ctrl_panel_o.planetsUpdatingTrail++;
+    }
+    
     r2 = power(x, 2) + power(y, 2);
     r3 = r2 * sqrt(r2);
 
@@ -18,18 +37,27 @@ if(alive){
     vx += ax;
     vy += ay;
     
-    if(frameCounter == 0){
-        for(i = saved_pos - 1; i > 0; i--) {
-            prev_x[i] = prev_x[i - 1];
-            prev_y[i] = prev_y[i - 1];
-        }
-        prev_x[0] = x;
-        prev_y[0] = y;
+    if(updateSavedPos) {
+        saved_pos++;
+        updateSavedPos = false;
+    }
+    for(i = saved_pos - 1; i > 0; i--) {
+        prev_x[i] = prev_x[i - 1];
+        prev_y[i] = prev_y[i - 1];
     }
     
-    frameCounter += 1;
-    frameCounter %= frameLimit;     
+    prev_x[0] = x;
+    prev_y[0] = y;   
     
     x += vx;
     y += vy;
+    
+    if(saved_pos > 1 && dir[0] < starting_dir && dir[1] > starting_dir) {
+            fullTranslation = true;
+        }
+        else {
+            if(!fullTranslation) {
+                updateSavedPos = true;
+            }
+        }
 }

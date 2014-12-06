@@ -43,7 +43,9 @@ ppy=366;
 pgox=548;
 pgoy=428;
 gameOver=0;
-global.planets = 8;
+global.planets = 4;
+planetsUpdatingTrail = 0;
+updatePlanetDirection = false;
 
 leftx=404;
 lefty=456;
@@ -80,32 +82,23 @@ oy=456;
         isOn=(isOn+1)%2;
         rot=(rot+180)%360;
     }
-    /*if(!updating &amp;&amp; isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
+    if(!updating &amp;&amp; isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
         cost = 3*(hidrogen_slider_o.sliderPos) + helium_slider_o.sliderPos;
         if(coin_purse_o.coins &gt;= cost){
             updating=(updating+1)%2;
+            updatePlanetDirection = true;
             timer=90;
         }
-    }*/
-    if(mx&gt;ox-dcenter &amp;&amp; mx&lt;=ox+dcenter &amp;&amp; my&gt;oy-dcenter &amp;&amp; my&lt;=oy+dcenter){
-        script_execute(orbit_visibility_src,mercury_orbit_o);
-        script_execute(orbit_visibility_src,venus_orbit_o);
-        script_execute(orbit_visibility_src,earth_orbit_o);
-        script_execute(orbit_visibility_src,mars_orbit_o);
-        script_execute(orbit_visibility_src,jupiter_orbit_o);
-        script_execute(orbit_visibility_src,saturn_orbit_o);
-        script_execute(orbit_visibility_src,uranus_orbit_o);
-        script_execute(orbit_visibility_src,neptune_orbit_o);
     }
     if(mx&gt;leftx-dcenter &amp;&amp; mx&lt;=leftx+dcenter &amp;&amp; my&gt;lefty-dcenter &amp;&amp; my&lt;=lefty+dcenter){
-        if(camera_o.index &gt; 7) {
+        if(camera_o.index &gt; array_length_1d(camera_o.targets) - 2) {
             camera_o.index = 0;
         }
         else {
             camera_o.index = camera_o.index + 1;
             
             while(camera_o.targets[camera_o.index].alive == 0) {
-                if(camera_o.index == 8) {
+                if(camera_o.index == array_length_1d(camera_o.targets) - 1) {
                     camera_o.index = 0;
                 }
                 else {
@@ -118,7 +111,7 @@ oy=456;
     }
     if(mx&gt;rightx-dcenter &amp;&amp; mx&lt;=rightx+dcenter &amp;&amp; my&gt;righty-dcenter &amp;&amp; my&lt;=righty+dcenter){
         if(camera_o.index &lt; 1) {
-            camera_o.index = 8;
+            camera_o.index = array_length_1d(camera_o.targets) - 1;
             
             while(camera_o.targets[camera_o.index].alive == 0) {
                 camera_o.index = camera_o.index - 1;
@@ -143,11 +136,15 @@ if(updating){
     timer--;
     if(!gameOver &amp;&amp; timer&lt;=0){ 
         updating=(updating+1)%2;
-        if(sun_o.m&gt;=897.0){
+        if(planetsUpdatingTrail == global.planets) {
+            updatePlanetDirection = false;
+            planetsUpdatingTrail = 0;
+        }
+        /*if(sun_o.m&gt;=897.0){
             isOn=0;
             planets = global.planets;
             gameOver=1;
-        }
+        }*/
     }
     if(gameOver) isOn=0;
 }
