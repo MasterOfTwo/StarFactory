@@ -34,7 +34,7 @@ alive=1;
 name="Mercury";
 radius=2*1.5;
 color=c_red;
-m = 10;
+saved_pos = 100;
 </string>
           </argument>
         </arguments>

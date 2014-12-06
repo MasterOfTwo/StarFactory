@@ -18,13 +18,17 @@ if(alive){
     vx += ax;
     vy += ay;
     
-    for(i = saved_pos - 1; i > 0; i--) {
-        prev_x[i] = prev_x[i - 1];
-        prev_y[i] = prev_y[i - 1];
+    if(frameCounter == 0){
+        for(i = saved_pos - 1; i > 0; i--) {
+            prev_x[i] = prev_x[i - 1];
+            prev_y[i] = prev_y[i - 1];
+        }
+        prev_x[0] = x;
+        prev_y[0] = y;
     }
     
-    prev_x[0] = x;
-    prev_y[0] = y;     
+    frameCounter += 1;
+    frameCounter %= frameLimit;     
     
     x += vx;
     y += vy;

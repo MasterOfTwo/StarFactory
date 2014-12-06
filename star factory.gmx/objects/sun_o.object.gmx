@@ -28,11 +28,11 @@
             <string>globalvar deltaT;
 globalvar G;
 deltaT=0.1;
-G=5;
+G=0.5;
 color=c_aqua;
 z = 0;
-mH = 100;
-mHe = 0;
+mH = 750;
+mHe = 250;
 mLi2Fe = 0;
 mHeavy = 0;
 zspeed = 0
