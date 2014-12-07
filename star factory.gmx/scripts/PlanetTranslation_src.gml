@@ -18,7 +18,7 @@ if(alive){
     
     if(change_trail == 1) {
         starting_dir = dir[0];
-        saved_pos = 1;
+        temp_saved_pos = 1;
         fullTranslation = false;
         change_trail--;
         ctrl_panel_o.planetsUpdatingTrail++;
@@ -38,7 +38,10 @@ if(alive){
     vy += ay;
     
     if(updateSavedPos) {
-        saved_pos++;
+        temp_saved_pos++;               //TO DO - if orbit expands.
+        if(num_fulltranslation == 0) {
+            saved_pos = temp_saved_pos;     
+        }
         updateSavedPos = false;
     }
     for(i = saved_pos - 1; i > 0; i--) {
@@ -54,10 +57,12 @@ if(alive){
     
     if(saved_pos > 1 && dir[0] < starting_dir && dir[1] > starting_dir) {
             fullTranslation = true;
+            num_fulltranslation++;
+            saved_pos = temp_saved_pos;
+    }
+    else {
+        if(!fullTranslation) {
+            updateSavedPos = true;
         }
-        else {
-            if(!fullTranslation) {
-                updateSavedPos = true;
-            }
-        }
+    }
 }
