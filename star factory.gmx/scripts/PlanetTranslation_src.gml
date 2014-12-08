@@ -1,8 +1,66 @@
 if(alive){
-    if(sun_o.radius+radius>=point_distance(x, y, sun_o.x, sun_o.y)){
-        alive=0;
-        global.planets -= 1;
-    }    
+    if(sun_o.radius + radius >= point_distance(x, y, sun_o.x, sun_o.y)){
+        collidedSun = true;
+    }
+    if(collidedSun) {
+        global.all_planets[planet_index_pos].alive = 0;
+        global.all_planets[planet_index_pos] = 0;
+        
+        temp_planets = 0;
+        new_index = 0;
+        count = 0;
+        
+        for(i = 0; i < global.num_planets; i++) {
+            if(global.all_planets[i] != 0) {
+                count++;
+                temp_planets[new_index] = global.all_planets[i];
+                new_index++;
+            }
+        }
+        
+        global.all_planets = temp_planets;
+        global.num_planets = count;   
+    }
+    else {
+        for(i = global.num_planets - 1; i >= 0; i--) { 
+            if(!(object_index == global.all_planets[i])) {
+                if(global.all_planets[i].radius + radius >= point_distance(x, y, global.all_planets[i].x, global.all_planets[i].y)) {
+                    global.all_planets[i].alive = 0
+                    global.all_planets[i] = 0;
+                    num_collision++;
+                    collision_index[num_collision] = i;  
+                }          
+            }
+            else {
+                planet_index_pos = i;
+            }
+        }
+        if(num_collision > -1) {
+            for(i = 0; i <= num_collision; i++) {
+                global.all_planets[collision_index[i]].alive = 0;
+                global.all_planets[collision_index[i]] = 0;
+            }
+            
+            global.all_planets[planet_index_pos].alive = 0;
+            global.all_planets[planet_index_pos] = 0;
+            
+            temp_planets = 0;
+            new_index = 0;
+            count = 0;
+            
+            for(i = 0; i < global.num_planets; i++) {
+                if(global.all_planets[i] != 0) {
+                    count++;
+                    temp_planets[new_index] = global.all_planets[i];
+                    new_index++;
+                }
+            }
+            
+            global.all_planets = temp_planets;
+            global.num_planets = count;
+        }
+    }
+        
     r = point_distance(x, y, sun_o.x, sun_o.y); //distance between the sun and the planet
     dir[1] = dir[0];
     dir[0] = point_direction(x, y, sun_o.x, sun_o.y); //direction between the sun and the planet in degrees

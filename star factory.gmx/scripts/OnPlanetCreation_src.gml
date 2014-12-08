@@ -15,3 +15,6 @@ fullTranslation = false;
 prev_x[0] = x;
 prev_y[0] = y;
 num_fulltranslation = 0;
+num_collision = -1;
+planet_index_pos = -1;
+collidedSun = false;

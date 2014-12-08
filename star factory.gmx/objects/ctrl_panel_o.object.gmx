@@ -43,7 +43,6 @@ ppy=366;
 pgox=548;
 pgoy=428;
 gameOver=0;
-global.planets = 4;
 planetsUpdatingTrail = 0;
 updatePlanetDirection = false;
 
@@ -53,6 +52,42 @@ rightx=356;
 righty=456;
 ox=308;
 oy=456;
+global.num_planets = 0;
+ 
+if(instance_exists(mercury_o)) {
+    planets[0] = mercury_o;
+    global.num_planets++;
+}
+if(instance_exists(venus_o)) {
+    planets[1] = venus_o;
+    global.num_planets++;
+}
+if(instance_exists(earth_o)) {
+    planets[2] = earth_o;
+    global.num_planets++;
+}
+if(instance_exists(mars_o)) {
+    planets[3] = mars_o;
+    global.num_planets++;
+}
+if(instance_exists(jupiter_o)) {
+    planets[4] = jupiter_o;
+    global.num_planets++;
+}
+if(instance_exists(saturn_o)) {
+    planets[5] = saturn_o;
+    global.num_planets++;
+}
+if(instance_exists(uranus_o)) {
+    planets[6] = uranus_o;
+    global.num_planets++;
+}
+if(instance_exists(neptune_o)) {
+    planets[7] = neptune_o;
+    global.num_planets++;
+}
+
+global.all_planets = planets;
 </string>
           </argument>
         </arguments>
@@ -136,7 +171,7 @@ if(updating){
     timer--;
     if(!gameOver &amp;&amp; timer&lt;=0){ 
         updating=(updating+1)%2;
-        if(planetsUpdatingTrail == global.planets) {
+        if(planetsUpdatingTrail == global.num_planets) {
             updatePlanetDirection = false;
             planetsUpdatingTrail = 0;
         }
