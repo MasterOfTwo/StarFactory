@@ -52,6 +52,7 @@ rightx=356;
 righty=456;
 ox=308;
 oy=456;
+paused = false;
 global.num_planets = 0;
  
 if(instance_exists(mercury_o)) {
@@ -114,8 +115,14 @@ global.all_planets = planets;
     mx=mouse_x;
     my=mouse_y;
     if(mx&gt;px-dcenter &amp;&amp; mx&lt;=px+dcenter &amp;&amp; my&gt;py-dcenter &amp;&amp; my&lt;=py+dcenter){
-        isOn=(isOn+1)%2;
-        rot=(rot+180)%360;
+        if(paused) {
+            paused = false;
+            camera_o.target = sun_o;
+        }
+        else{
+            isOn=(isOn+1)%2;
+            rot=(rot+180)%360;
+        }
     }
     if(!updating &amp;&amp; isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
         cost = 3*(hidrogen_slider_o.sliderPos) + helium_slider_o.sliderPos;
@@ -248,6 +255,7 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
         draw_text(500,70,"Li-Fe: "+string_format((sun_o.mLi2Fe/sun_o.m)*100, 3, 2)+"%");
         draw_text(500,90,"Heavy: "+string_format((sun_o.mHeavy/sun_o.m)*100, 3, 2)+"%");
         draw_text(500,110,"T: "+string_format(sun_o.temperature, 5, 2)+"K");
+        draw_text(500,150,"T: "+string_format(earth_o.temperature, 5, 2)+"K");
     }else{
         draw_text(8,60,"Planet: "+camera_o.target.name);
         draw_text(8,80,"Orbital Speed: "+string(camera_o.target.myspeed));

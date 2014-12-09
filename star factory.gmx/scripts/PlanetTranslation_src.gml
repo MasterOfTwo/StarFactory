@@ -1,4 +1,8 @@
-if(alive){
+if(alive && !ctrl_panel_o.paused){
+    if(mouse_check_button(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
+       camera_o.target = object_index;
+       ctrl_panel_o.paused = true; 
+    }
     if(sun_o.radius + radius >= point_distance(x, y, sun_o.x, sun_o.y)){
         collidedSun = true;
     }

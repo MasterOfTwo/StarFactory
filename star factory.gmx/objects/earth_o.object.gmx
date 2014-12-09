@@ -38,6 +38,10 @@ alive=1;
 name="Earth";
 radius=2*3;
 color=c_green;
+temperature = 0;
+absorption = 0.5;
+emission = 0.1;
+ratio = 1/4;
 </string>
           </argument>
         </arguments>
@@ -101,6 +105,46 @@ color=c_green;
           <argument>
             <kind>9</kind>
             <script>PlanetTranslation_src</script>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>601</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_execute_script</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>9</kind>
+            <script>PlanetTemperatureUpdate_src</script>
           </argument>
           <argument>
             <kind>0</kind>
