@@ -42,6 +42,7 @@ temperature = 0;
 absorption = 0.5;
 emission = 0.1;
 ratio = 1/4;
+mass = 250;
 </string>
           </argument>
         </arguments>

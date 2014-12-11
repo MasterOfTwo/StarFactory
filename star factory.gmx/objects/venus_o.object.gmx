@@ -38,6 +38,7 @@ alive=1;
 name="Venus";
 radius=2*3;
 color=c_olive;
+mass = 200;
 </string>
           </argument>
         </arguments>

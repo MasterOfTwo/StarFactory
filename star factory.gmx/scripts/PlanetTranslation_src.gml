@@ -1,3 +1,6 @@
+if(r > death_distance) {
+    alive = 0;        
+}
 if(alive && !ctrl_panel_o.paused){
     if(mouse_check_button(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
        camera_o.target = object_index;
@@ -29,9 +32,8 @@ if(alive && !ctrl_panel_o.paused){
         for(i = global.num_planets - 1; i >= 0; i--) { 
             if(!(object_index == global.all_planets[i])) {
                 if(global.all_planets[i].radius + radius >= point_distance(x, y, global.all_planets[i].x, global.all_planets[i].y)) {
-                    global.all_planets[i].alive = 0
-                    global.all_planets[i] = 0;
                     num_collision++;
+                    last_index_collision = collision_index[0];
                     collision_index[num_collision] = i;  
                 }          
             }
@@ -39,29 +41,38 @@ if(alive && !ctrl_panel_o.paused){
                 planet_index_pos = i;
             }
         }
-        if(num_collision > -1) {
-            for(i = 0; i <= num_collision; i++) {
-                global.all_planets[collision_index[i]].alive = 0;
-                global.all_planets[collision_index[i]] = 0;
+        
+        if(num_collision > -1) { //&& last_index_collision != collision_index[num_collision]) {
+            if(last_index_collision != collision_index[num_collision]) {
+                planet_life -= num_collision + 1;
             }
             
-            global.all_planets[planet_index_pos].alive = 0;
-            global.all_planets[planet_index_pos] = 0;
+            if(planet_life <= 0) {
+                global.all_planets[planet_index_pos].alive = 0;
+                global.all_planets[planet_index_pos] = 0;
             
-            temp_planets = 0;
-            new_index = 0;
-            count = 0;
-            
-            for(i = 0; i < global.num_planets; i++) {
-                if(global.all_planets[i] != 0) {
-                    count++;
-                    temp_planets[new_index] = global.all_planets[i];
-                    new_index++;
+                temp_planets = 0;
+                new_index = 0;
+                count = 0;
+                
+                for(i = 0; i < global.num_planets; i++) {
+                    if(global.all_planets[i] != 0) {
+                        count++;
+                        temp_planets[new_index] = global.all_planets[i];
+                        new_index++;
+                    }
                 }
+                
+                global.all_planets = temp_planets;
+                global.num_planets = count;
             }
-            
-            global.all_planets = temp_planets;
-            global.num_planets = count;
+            else {
+                collision_vx = ((mass * vx) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vx)) / (mass + global.all_planets[collision_index[0]].mass);
+                collision_vy = ((mass * vy) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vy)) / (mass + global.all_planets[collision_index[0]].mass);
+            }
+        }
+        else {
+            last_index_collision = -1;
         }
     }
         
@@ -73,7 +84,7 @@ if(alive && !ctrl_panel_o.paused){
         canChangeTrail = true;
     }
     
-    if(ctrl_panel_o.updatePlanetDirection && canChangeTrail) {
+    if((ctrl_panel_o.updatePlanetDirection || num_collision > -1) && canChangeTrail) {
         change_trail++;
         canChangeTrail = false;    
     }
@@ -99,9 +110,15 @@ if(alive && !ctrl_panel_o.paused){
     vx += ax;
     vy += ay;
     
+    if(num_collision > -1) {
+        vx = collision_vx;
+        vy = collision_vy;
+        num_collision = -1;
+    }
+    
     if(updateSavedPos) {
         temp_saved_pos++;               //TO DO - if orbit expands.
-        if(num_fulltranslation == 0) {
+        if(temp_saved_pos > saved_pos) {
             saved_pos = temp_saved_pos;     
         }
         updateSavedPos = false;
@@ -119,7 +136,6 @@ if(alive && !ctrl_panel_o.paused){
     
     if(saved_pos > 1 && dir[0] < starting_dir && dir[1] > starting_dir) {
             fullTranslation = true;
-            num_fulltranslation++;
             saved_pos = temp_saved_pos;
     }
     else {

@@ -38,6 +38,7 @@ alive=1;
 name="Mars";
 radius=2*2;
 color=c_maroon;
+mass = 150;
 </string>
           </argument>
         </arguments>
