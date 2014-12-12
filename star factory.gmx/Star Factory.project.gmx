@@ -31,6 +31,7 @@
     <script>scripts\PlanetOrbitDraw_src.gml</script>
     <script>scripts\CreateTrail.gml</script>
     <script>scripts\PlanetTemperatureUpdate_src.gml</script>
+    <script>scripts\AsteroidMovement_src.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\objectives_text_o</object>
@@ -54,6 +55,7 @@
     <object>objects\coin_purse_o</object>
     <object>objects\pause_menu_o</object>
     <object>objects\trail_o</object>
+    <object>objects\asteroid_o</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>

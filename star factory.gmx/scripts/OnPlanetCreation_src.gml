@@ -21,3 +21,5 @@ collision_index[0] = -1
 last_index_collision = -1;
 planet_life = 5;
 death_distance = 600;
+asteroid = -1;
+asteroidCollided = false; 

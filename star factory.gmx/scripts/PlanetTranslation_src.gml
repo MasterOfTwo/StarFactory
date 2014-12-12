@@ -2,9 +2,15 @@ if(r > death_distance) {
     alive = 0;        
 }
 if(alive && !ctrl_panel_o.paused){
-    if(mouse_check_button(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
-       camera_o.target = object_index;
-       ctrl_panel_o.paused = true; 
+    if(asteroid == -1 && mouse_check_button(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
+       //camera_o.target = object_index;
+       //ctrl_panel_o.paused = true;
+       asteroid = instance_create(x, y, asteroid_o);
+       asteroid.target = object_index;
+       with(asteroid) {
+        event_perform(ev_create, 0);
+        event_perform(ev_draw, 0);
+       } 
     }
     if(sun_o.radius + radius >= point_distance(x, y, sun_o.x, sun_o.y)){
         collidedSun = true;
@@ -29,50 +35,86 @@ if(alive && !ctrl_panel_o.paused){
         global.num_planets = count;   
     }
     else {
-        for(i = global.num_planets - 1; i >= 0; i--) { 
-            if(!(object_index == global.all_planets[i])) {
-                if(global.all_planets[i].radius + radius >= point_distance(x, y, global.all_planets[i].x, global.all_planets[i].y)) {
-                    num_collision++;
-                    last_index_collision = collision_index[0];
-                    collision_index[num_collision] = i;  
-                }          
-            }
-            else {
-                planet_index_pos = i;
-            }
-        }
-        
-        if(num_collision > -1) { //&& last_index_collision != collision_index[num_collision]) {
-            if(last_index_collision != collision_index[num_collision]) {
-                planet_life -= num_collision + 1;
-            }
-            
-            if(planet_life <= 0) {
-                global.all_planets[planet_index_pos].alive = 0;
-                global.all_planets[planet_index_pos] = 0;
-            
-                temp_planets = 0;
-                new_index = 0;
-                count = 0;
+        if(asteroid != -1) {
+            if(radius + asteroid.radius >= point_distance(x, y, asteroid.x, asteroid.y)) {
+                planet_life -= 1;
                 
-                for(i = 0; i < global.num_planets; i++) {
-                    if(global.all_planets[i] != 0) {
-                        count++;
-                        temp_planets[new_index] = global.all_planets[i];
-                        new_index++;
+                if(planet_life <= 0) {
+                    global.all_planets[planet_index_pos].alive = 0;
+                    global.all_planets[planet_index_pos] = 0;
+                
+                    temp_planets = 0;
+                    new_index = 0;
+                    count = 0;
+                    
+                    for(i = 0; i < global.num_planets; i++) {
+                        if(global.all_planets[i] != 0) {
+                            count++;
+                            temp_planets[new_index] = global.all_planets[i];
+                            new_index++;
+                        }
                     }
+                    
+                    global.all_planets = temp_planets;
+                    global.num_planets = count;
+                }
+                else {
+                    asteroidCollided = true;
+                
+                    collision_vx = ((mass * vx) + (asteroid.mass * asteroid.vx)) / (mass + asteroid.mass);
+                    collision_vy = ((mass * vy) + (asteroid.mass * asteroid.vy)) / (mass + asteroid.mass);
                 }
                 
-                global.all_planets = temp_planets;
-                global.num_planets = count;
-            }
-            else {
-                collision_vx = ((mass * vx) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vx)) / (mass + global.all_planets[collision_index[0]].mass);
-                collision_vy = ((mass * vy) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vy)) / (mass + global.all_planets[collision_index[0]].mass);
-            }
+                asteroid.kill = true;
+                asteroid = -1;
+            }   
         }
         else {
-            last_index_collision = -1;
+            for(i = global.num_planets - 1; i >= 0; i--) { 
+                if(!(object_index == global.all_planets[i])) {
+                    if(global.all_planets[i].radius + radius >= point_distance(x, y, global.all_planets[i].x, global.all_planets[i].y)) {
+                        num_collision++;
+                        last_index_collision = collision_index[0];
+                        collision_index[num_collision] = i;  
+                    }          
+                }
+                else {
+                    planet_index_pos = i;
+                }
+            }
+            
+            if(num_collision > -1) {
+                if(last_index_collision != collision_index[num_collision]) {
+                    planet_life -= num_collision + 1;
+                }
+                
+                if(planet_life <= 0) {
+                    global.all_planets[planet_index_pos].alive = 0;
+                    global.all_planets[planet_index_pos] = 0;
+                
+                    temp_planets = 0;
+                    new_index = 0;
+                    count = 0;
+                    
+                    for(i = 0; i < global.num_planets; i++) {
+                        if(global.all_planets[i] != 0) {
+                            count++;
+                            temp_planets[new_index] = global.all_planets[i];
+                            new_index++;
+                        }
+                    }
+                    
+                    global.all_planets = temp_planets;
+                    global.num_planets = count;
+                }
+                else {
+                    collision_vx = ((mass * vx) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vx)) / (mass + global.all_planets[collision_index[0]].mass);
+                    collision_vy = ((mass * vy) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vy)) / (mass + global.all_planets[collision_index[0]].mass);
+                }
+            }
+            else {
+                last_index_collision = -1;
+            }
         }
     }
         
@@ -84,7 +126,7 @@ if(alive && !ctrl_panel_o.paused){
         canChangeTrail = true;
     }
     
-    if((ctrl_panel_o.updatePlanetDirection || num_collision > -1) && canChangeTrail) {
+    if((ctrl_panel_o.updatePlanetDirection || num_collision > -1 || asteroidCollided) && canChangeTrail) {
         change_trail++;
         canChangeTrail = false;    
     }
@@ -110,14 +152,15 @@ if(alive && !ctrl_panel_o.paused){
     vx += ax;
     vy += ay;
     
-    if(num_collision > -1) {
+    if(num_collision > -1 || asteroidCollided) {
         vx = collision_vx;
         vy = collision_vy;
         num_collision = -1;
+        asteroidCollided = false;
     }
     
     if(updateSavedPos) {
-        temp_saved_pos++;               //TO DO - if orbit expands.
+        temp_saved_pos++;               
         if(temp_saved_pos > saved_pos) {
             saved_pos = temp_saved_pos;     
         }
