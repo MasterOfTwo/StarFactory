@@ -120,6 +120,7 @@ elem_timer=30;
     if(mx&gt;px-dcenter &amp;&amp; mx&lt;=px+dcenter &amp;&amp; my&gt;py-dcenter &amp;&amp; my&lt;=py+dcenter){
         if(paused) {
             paused = false;
+            camera_o.target.aimed = false;
             camera_o.target = sun_o;
         }
         else{
@@ -208,6 +209,9 @@ if(updating){
             updatePlanetDirection = false;
             planetsUpdatingTrail = 0;
         }
+        hidrogen_slider_o.sliderPos = 0;
+        helium_slider_o.sliderPos = 0;
+        other_elems_slider_o.sliderPos = 0;
         /*if(sun_o.m&gt;=897.0){
             isOn=0;
             planets = global.planets;
@@ -297,14 +301,21 @@ if(camera_o.target==sun_o) elem_timer--;
         draw_text(500,150,"T: "+string_format(earth_o.temperature, 5, 2)+"K");
     }else{
         draw_set_alpha(0.5);
-        draw_roundrect_colour(0, 55, 200, 100, c_dkgray, c_dkgray, false);
+        draw_roundrect_colour(0, 55, 220, 140, c_dkgray, c_dkgray, false);
         draw_set_alpha(1.0);
         
         if (step_count mod 40 &lt; 20)
             draw_sprite_ext(pause_sp, false, 320, 40, 1,1,0, c_white, 1);
             
         draw_text(8,60,"Planet: "+camera_o.target.name);
-        draw_text(8,80,"Orbital Speed: "+string(camera_o.target.myspeed));
+        draw_text(8,80,"Orbital Speed: "+ string(camera_o.target.myspeed));
+        draw_text(8,100,"Hit Points: "+ string(camera_o.target.planet_life));
+        if(!camera_o.target.aimed) {
+            draw_text(8,120,"Li-Fe Quantity: "+ string(other_elems_slider_o.stored));
+        } 
+        else {
+            draw_text(8,120,"Li-Fe Quantity: "+ string(other_elems_slider_o.stored) + "(-50)");
+        }
         step_count++;
     }
 }

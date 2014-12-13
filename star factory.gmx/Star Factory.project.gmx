@@ -35,9 +35,7 @@
     <script>scripts\PlanetTemperatureUpdate_src.gml</script>
     <script>scripts\AsteroidMovement_src.gml</script>
   </scripts>
-  <fonts name="fonts">
-    <font>fonts\font0</font>
-  </fonts>
+  <fonts name="fonts"/>
   <objects name="objects">
     <object>objects\objectives_text_o</object>
     <object>objects\sun_o</object>

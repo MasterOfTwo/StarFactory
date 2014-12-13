@@ -49,7 +49,7 @@ py=180;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(ctrl_panel_o.isOn &amp;&amp; !ctrl_panel_o.updating &amp;&amp; !ctrl_panel_o.gameOver){
+            <string>/*if(ctrl_panel_o.isOn &amp;&amp; !ctrl_panel_o.updating &amp;&amp; !ctrl_panel_o.gameOver){
     draw_set_alpha(0.5);
     draw_roundrect_colour(500 - 15, 220 - 5, 635, 370, c_dkgray, c_dkgray, false);
     draw_set_alpha(1.0);
@@ -68,7 +68,7 @@ py=180;
     }
     draw_set_colour(c_white);
     draw_set_halign(fa_left);
-}
+}*/
 </string>
           </argument>
         </arguments>
