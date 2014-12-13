@@ -93,6 +93,79 @@ global.all_planets = planets;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>30</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>30</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>hidrogen_slider_o.stored+=1;
+helium_slider_o.stored+=1;
+other_elems_slider_o.stored+=1;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -125,8 +198,11 @@ global.all_planets = planets;
         }
     }
     if(!updating &amp;&amp; isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
-        cost = 3*(hidrogen_slider_o.sliderPos) + helium_slider_o.sliderPos;
-        if(coin_purse_o.coins &gt;= cost){
+        //cost = 3*(hidrogen_slider_o.sliderPos) + helium_slider_o.sliderPos;
+        h=hidrogen_slider_o.sliderPos&lt;=hidrogen_slider_o.stored;
+        he=helium_slider_o.sliderPos&lt;=helium_slider_o.stored;
+        li2fe=other_elems_slider_o.sliderPos&lt;=other_elems_slider_o.stored;
+        if(h &amp;&amp; he &amp;&amp; li2fe){
             updating=(updating+1)%2;
             updatePlanetDirection = true;
             timer=90;
@@ -172,9 +248,12 @@ global.all_planets = planets;
 }
 if(updating){
     sun_o.mH+=hidrogen_slider_o.sliderPos/90;
+    hidrogen_slider_o.stored-=hidrogen_slider_o.sliderPos/90;
     sun_o.mHe+=helium_slider_o.sliderPos/90;
+    helium_slider_o.stored-=helium_slider_o.sliderPos/90;
     sun_o.mLi2Fe+=other_elems_slider_o.sliderPos/90;
-    coin_purse_o.coins-=3*(hidrogen_slider_o.sliderPos/90)+helium_slider_o.sliderPos/90;
+    other_elems_slider_o.stored-=other_elems_slider_o.sliderPos/90;
+    //coin_purse_o.coins-=3*(hidrogen_slider_o.sliderPos/90)+helium_slider_o.sliderPos/90;
     timer--;
     if(!gameOver &amp;&amp; timer&lt;=0){ 
         updating=(updating+1)%2;

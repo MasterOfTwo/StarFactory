@@ -29,7 +29,7 @@
 py=280
 sliderPos=0;
 name="Li through Fe";
-stored=600;
+stored=200;
 </string>
           </argument>
         </arguments>

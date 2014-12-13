@@ -29,7 +29,7 @@
 py=64
 sliderPos=0;
 name="Hydrogen";
-stored=100;
+stored=0;
 </string>
           </argument>
         </arguments>

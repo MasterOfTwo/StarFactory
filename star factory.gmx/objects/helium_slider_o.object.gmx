@@ -29,7 +29,7 @@
 py=172
 sliderPos=0;
 name="Hellium";
-stored=200;
+stored=100;
 </string>
           </argument>
         </arguments>
