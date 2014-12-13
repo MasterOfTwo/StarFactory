@@ -46,6 +46,7 @@ gameOver=0;
 planetsUpdatingTrail = 0;
 updatePlanetDirection = false;
 step_count = 0; // used to blink pause text
+obj_time = 15; 
 
 leftx=404;
 lefty=456;
@@ -92,6 +93,7 @@ if(instance_exists(neptune_o)) {
 global.all_planets = planets;
 
 elem_timer=30;
+objective_timer = 30;
 </string>
           </argument>
         </arguments>
@@ -235,7 +237,17 @@ if(elem_timer==0){
     other_elems_slider_o.stored+=1;
     elem_timer=30;
 }
-if(camera_o.target==sun_o) elem_timer--;
+if(camera_o.target==sun_o) {
+    elem_timer--;
+    objective_timer--;
+}
+if(objective_timer == 0) {
+    obj_time--;
+    objective_timer = 30;
+}
+if(obj_time == 0) {
+    gameOver = 1;
+}
 </string>
           </argument>
         </arguments>
@@ -284,6 +296,11 @@ if(camera_o.target==sun_o) elem_timer--;
             <string>if(isOn &amp;&amp; !gameOver){
     //draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     //draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
+    if(obj_time &lt; 11) {
+        draw_set_colour(c_red);
+    }
+    draw_text(300,10, string_format(obj_time, 3, 0)+"s");
+    draw_set_colour(c_white);
     if(!updating) {
         if(camera_o.target.aimed) draw_sprite(meteor_sp,0,leftx, lefty);
     }
@@ -299,13 +316,30 @@ if(camera_o.target==sun_o) elem_timer--;
         draw_text(500,90,"Heavy: "+string_format((sun_o.mHeavy/sun_o.m)*100, 3, 2)+"%");
         draw_text(500,110,"T: "+string_format(sun_o.temperature, 5, 2)+"K");
         draw_text(500,150,"T: "+string_format(earth_o.temperature, 5, 2)+"K");
+        
+        draw_set_alpha(0.5);
+        draw_roundrect_colour(500 - 15, 220 - 5, 635, 370, c_dkgray, c_dkgray, false);
+        draw_set_alpha(1.0);
+        
+        draw_set_halign(fa_right);
+        draw_text(640 - 15, 220, "Objective:");
+        
+        if (camera_o.target==sun_o) {
+            draw_set_colour(c_aqua);        
+            draw_text(640 - 15, 250, "Collide# planet Mercury# with planet Mars!"); 
+            /*draw_set_colour(c_orange);
+            draw_text(640 - 15, 300, "A planet in this#system has#a bonus#objective!");
+            draw_set_colour(c_aqua);*/
+        }
+        draw_set_colour(c_white);
+        draw_set_halign(fa_left);
     }else{
         draw_set_alpha(0.5);
         draw_roundrect_colour(0, 55, 220, 140, c_dkgray, c_dkgray, false);
         draw_set_alpha(1.0);
         
         if (step_count mod 40 &lt; 20)
-            draw_sprite_ext(pause_sp, false, 320, 40, 1,1,0, c_white, 1);
+            draw_sprite_ext(pause_sp, false, 320, 65, 1,1,0, c_white, 1);
             
         draw_text(8,60,"Planet: "+camera_o.target.name);
         draw_text(8,80,"Orbital Speed: "+ string(camera_o.target.myspeed));
@@ -326,9 +360,9 @@ if(gameOver){
     draw_text(8,60,"Game Over!"); 
     if(sun_o.alive){
         points=0;
-        planet_points = planets*1000;
+        planet_points = global.num_planets*1000;
         points += planet_points;
-        draw_text(8, 80, string_format(planets, 1, 0) + " Planets survived: " + string_format(planet_points, 0, 0) + " Points");
+        draw_text(8, 80, string_format(global.num_planets, 1, 0) + " Planets survived: " + string_format(planet_points, 0, 0) + " Points");
         if(sun_o.temperature &gt;= 4800 &amp;&amp; sun_o.temperature &lt;= 5200) {
             points += 2000;
             draw_text(8, 100, "Life on Earth: 2000 Points");
