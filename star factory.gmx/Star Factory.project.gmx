@@ -12,6 +12,7 @@
     <sprite>sprites\slider_background_sp</sprite>
     <sprite>sprites\gui_guard_sp</sprite>
     <sprite>sprites\play_sp</sprite>
+    <sprite>sprites\pause_sp</sprite>
     <sprite>sprites\game_over_sp</sprite>
     <sprite>sprites\orbit_sp</sprite>
     <sprite>sprites\left_sp</sprite>

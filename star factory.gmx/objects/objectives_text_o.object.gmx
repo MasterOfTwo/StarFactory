@@ -64,7 +64,7 @@ py=180;
         draw_text(640 - 15, 300, "A planet in this#system has#a bonus#objective!");
         draw_set_colour(c_aqua);
     } else if (camera_o.target==earth_o) {
-        draw_text(640, 260, "This planet#can support#life if the#Star's temperature#stays between#4800k and 5200k");
+        draw_text(640 - 8, 260, "This planet can#support life# if the Star's#temperature#stays between# 4800k and 5200k");
     }
     draw_set_colour(c_white);
     draw_set_halign(fa_left);

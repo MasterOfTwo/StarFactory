@@ -45,6 +45,7 @@ pgoy=428;
 gameOver=0;
 planetsUpdatingTrail = 0;
 updatePlanetDirection = false;
+step_count = 0; // used to blink pause text
 
 leftx=404;
 lefty=456;
@@ -339,8 +340,16 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
         draw_text(500,110,"T: "+string_format(sun_o.temperature, 5, 2)+"K");
         draw_text(500,150,"T: "+string_format(earth_o.temperature, 5, 2)+"K");
     }else{
+        draw_set_alpha(0.5);
+        draw_roundrect_colour(0, 55, 200, 100, c_dkgray, c_dkgray, false);
+        draw_set_alpha(1.0);
+        
+        if (step_count mod 40 &lt; 20)
+            draw_sprite_ext(pause_sp, false, 320, 40, 1,1,0, c_white, 1);
+            
         draw_text(8,60,"Planet: "+camera_o.target.name);
         draw_text(8,80,"Orbital Speed: "+string(camera_o.target.myspeed));
+        step_count++;
     }
 }
 
