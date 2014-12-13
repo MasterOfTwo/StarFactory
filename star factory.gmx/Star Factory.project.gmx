@@ -21,6 +21,7 @@
     <sprite>sprites\pause_resume_sp</sprite>
     <sprite>sprites\pause_background_sp</sprite>
     <sprite>sprites\sun_sp</sprite>
+    <sprite>sprites\thermometer_sp</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -35,7 +36,6 @@
     <script>scripts\PlanetTemperatureUpdate_src.gml</script>
     <script>scripts\AsteroidMovement_src.gml</script>
   </scripts>
-  <fonts name="fonts"/>
   <objects name="objects">
     <object>objects\objectives_text_o</object>
     <object>objects\sun_o</object>
@@ -59,6 +59,7 @@
     <object>objects\pause_menu_o</object>
     <object>objects\trail_o</object>
     <object>objects\asteroid_o</object>
+    <object>objects\thermometer_o</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>

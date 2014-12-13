@@ -63,6 +63,7 @@
     <instance objName="coin_purse_o" x="480" y="448" name="inst_2B8DF6EC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="mercury_o" x="64" y="32" name="inst_A8D5E00C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="venus_o" x="96" y="32" name="inst_D3A255CC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="thermometer_o" x="512" y="432" name="inst_6CBEEABA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

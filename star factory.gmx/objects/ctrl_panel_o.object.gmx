@@ -383,6 +383,7 @@ if(gameOver){
     //draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
     //draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
 }
+
 </string>
           </argument>
         </arguments>
