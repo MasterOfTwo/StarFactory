@@ -327,7 +327,10 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
             <string>if(isOn &amp;&amp; !gameOver){
     //draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     //draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
-    if(!updating) draw_sprite(play_sp,0,ppx,ppy);
+    if(!updating) {
+        draw_sprite(play_sp,0,ppx + 5,ppy);
+        draw_sprite(meteor_sp,0,ppx + 65,ppy);
+    }
     if(camera_o.target==sun_o){
         draw_set_alpha(0.5);
         draw_roundrect_colour(500 - 15, 5, 635, 170, c_dkgray, c_dkgray, false);
