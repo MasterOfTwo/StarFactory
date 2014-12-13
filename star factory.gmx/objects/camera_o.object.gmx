@@ -195,7 +195,7 @@ if(!ctrl_panel_o.isOn){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(index == 0) {
+            <string>if(target == sun_o) {
     global.camera_x = x - lengthdir_x(lengthdir_x(distance, tilt), pan)
     global.camera_y = y - lengthdir_y(lengthdir_x(distance, tilt), pan)
     global.camera_z = z - lengthdir_y(distance, tilt)

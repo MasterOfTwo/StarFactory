@@ -5,9 +5,6 @@ if(alive && !ctrl_panel_o.paused){
     if(asteroid == -1 && mouse_check_button(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
        camera_o.target = object_index;
        ctrl_panel_o.paused = true;
-       camera_o.distance = 80;
-       global.camera_x = x; 
-       global.camera_y = 80; 
        //global.camera_z = z; 
        /*asteroid = instance_create(x, y, asteroid_o);
        asteroid.target = object_index;
