@@ -46,7 +46,7 @@ gameOver=0;
 planetsUpdatingTrail = 0;
 updatePlanetDirection = false;
 step_count = 0; // used to blink pause text
-obj_time = 15; 
+obj_time = 180; 
 
 leftx=404;
 lefty=456;
@@ -94,6 +94,7 @@ global.all_planets = planets;
 
 elem_timer=30;
 objective_timer = 30;
+objective_complete = false;
 </string>
           </argument>
         </arguments>
@@ -245,7 +246,8 @@ if(objective_timer == 0) {
     obj_time--;
     objective_timer = 30;
 }
-if(obj_time == 0) {
+if(objective_complete) gameOver = 1;
+if(obj_time == 0 || mercury_o.alive == 0 || mars_o.alive == 0) {
     gameOver = 1;
 }
 </string>
@@ -326,7 +328,7 @@ if(obj_time == 0) {
         
         if (camera_o.target==sun_o) {
             draw_set_colour(c_aqua);        
-            draw_text(640 - 15, 250, "Collide# planet Mercury# with planet Mars!"); 
+            draw_text(640 - 15, 250, "Collide# planet Mercury# with #planet Mars!"); 
             /*draw_set_colour(c_orange);
             draw_text(640 - 15, 300, "A planet in this#system has#a bonus#objective!");
             draw_set_colour(c_aqua);*/

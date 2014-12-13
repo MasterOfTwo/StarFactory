@@ -108,7 +108,12 @@ if(alive && !ctrl_panel_o.paused){
                 if(global.all_planets[i].radius + radius >= point_distance(x, y, global.all_planets[i].x, global.all_planets[i].y)) {
                     num_collision++;
                     last_index_collision = collision_index[0];
-                    collision_index[num_collision] = i;  
+                    collision_index[num_collision] = i;
+                    if(object_get_name(object_index) == mercury_o ||  object_get_name(object_index) == mars_o) {
+                        if(object_get_name(global.all_planets[i]) == mercury_o) {
+                            ctrl_panel_o.objective_complete = true;
+                        }   
+                    }
                 }          
             }
             else {
