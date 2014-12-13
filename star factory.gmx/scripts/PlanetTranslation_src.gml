@@ -3,14 +3,18 @@ if(r > death_distance) {
 }
 if(alive && !ctrl_panel_o.paused){
     if(asteroid == -1 && mouse_check_button(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
-       //camera_o.target = object_index;
-       //ctrl_panel_o.paused = true;
-       asteroid = instance_create(x, y, asteroid_o);
+       camera_o.target = object_index;
+       ctrl_panel_o.paused = true;
+       camera_o.distance = 80;
+       global.camera_x = x; 
+       global.camera_y = 80; 
+       //global.camera_z = z; 
+       /*asteroid = instance_create(x, y, asteroid_o);
        asteroid.target = object_index;
        with(asteroid) {
         event_perform(ev_create, 0);
         event_perform(ev_draw, 0);
-       } 
+       }*/ 
     }
     if(sun_o.radius + radius >= point_distance(x, y, sun_o.x, sun_o.y)){
         collidedSun = true;

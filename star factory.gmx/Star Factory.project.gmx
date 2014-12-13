@@ -56,6 +56,7 @@
     <object>objects\pause_menu_o</object>
     <object>objects\trail_o</object>
     <object>objects\asteroid_o</object>
+    <object>objects\object20</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\space_room</room>

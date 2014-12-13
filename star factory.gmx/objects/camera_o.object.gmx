@@ -195,15 +195,26 @@ if(!ctrl_panel_o.isOn){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.camera_x = x - lengthdir_x(lengthdir_x(distance, tilt), pan)
-global.camera_y = y - lengthdir_y(lengthdir_x(distance, tilt), pan)
-global.camera_z = z - lengthdir_y(distance, tilt)
-global.camera_d = pan
-d3d_set_projection(
-    global.camera_x, global.camera_y, global.camera_z,
-    x, y, z,
-    0, 0, 1)
-
+            <string>if(index == 0) {
+    global.camera_x = x - lengthdir_x(lengthdir_x(distance, tilt), pan)
+    global.camera_y = y - lengthdir_y(lengthdir_x(distance, tilt), pan)
+    global.camera_z = z - lengthdir_y(distance, tilt)
+    global.camera_d = pan
+    d3d_set_projection(
+        global.camera_x, global.camera_y, global.camera_z,
+        x, y, z,
+        0, 0, 1)
+}
+else {
+    global.camera_x = x - lengthdir_x(lengthdir_x(80, 89.99), pan)
+    global.camera_y = y - lengthdir_y(lengthdir_x(80, 89.99), pan)
+    global.camera_z = z - lengthdir_y(80, 89.99)
+    global.camera_d = pan
+    d3d_set_projection(
+        global.camera_x, global.camera_y, global.camera_z,
+        x, y, z,
+        0, 0, 1)
+}
 </string>
           </argument>
         </arguments>
