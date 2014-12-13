@@ -18,7 +18,7 @@ if(target.alive && !ctrl_panel_o.paused){
         //}
         //frameCounter+=1
         //frameCounter%=frameLimit;
-        move_towards_point(target.x, target.y, 2);
+        move_towards_point(target.x, target.y, sqrt(power(vx, 2) + power(vy, 2)));
         
         if(target.radius + radius >= point_distance(x, y, target.x, target.y)) {
             if(kill) {

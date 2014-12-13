@@ -108,8 +108,22 @@ if(alive && !ctrl_panel_o.paused){
                     global.num_planets = count;
                 }
                 else {
-                    collision_vx = ((mass * vx) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vx)) / (mass + global.all_planets[collision_index[0]].mass);
-                    collision_vy = ((mass * vy) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vy)) / (mass + global.all_planets[collision_index[0]].mass);
+                    va = sqrt(power(global.all_planets[collision_index[0]].vx, 2) + power(global.all_planets[collision_index[0]].vy, 2));
+                    vp = sqrt(power(vx, 2) + power(vy, 2));
+                    
+                    tetaa = point_direction(0, 0, global.all_planets[collision_index[0]].vx, global.all_planets[collision_index[0]].vy);
+                    tetap = point_direction(0, 0, vx, vy);
+                    
+                    dot = vx * global.all_planets[collision_index[0]].vx + vy * global.all_planets[collision_index[0]].vy; 
+                    phi = arccos(dot / (va * vp));
+                    
+                    numerator = vp * cos(tetap - phi) * (mass - global.all_planets[collision_index[0]].mass) + 2 * global.all_planets[collision_index[0]].mass * va * cos(tetaa - phi);
+                    denominator = mass + global.all_planets[collision_index[0]].mass;
+                    
+                    collision_vx = (numerator / denominator) * cos(phi) + vp * sin(tetap - phi) * cos(phi + 90);                    
+                    collision_vy = (numerator / denominator) * sin(phi) + vp * sin(tetap - phi) * sin(phi + 90);
+                    //collision_vx = ((mass * vx) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vx)) / (mass + global.all_planets[collision_index[0]].mass);
+                    //collision_vy = ((mass * vy) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vy)) / (mass + global.all_planets[collision_index[0]].mass);
                 }
             }
             else {
