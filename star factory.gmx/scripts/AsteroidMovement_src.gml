@@ -1,4 +1,4 @@
-if(target.alive && !ctrl_panel_o.paused){
+if(target.alive){
         if(updateSavedPos) {
             temp_saved_pos++;
             if(temp_saved_pos > saved_pos) {

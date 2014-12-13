@@ -1,4 +1,4 @@
-escalar = power(150,2)/(power(320,2)+power(240,2));
+escalar = 0.5*power(150,2)/(power(320,2)+power(240,2));
 if(r > death_distance) {
     alive = 0;        
 }
@@ -12,19 +12,58 @@ if(ctrl_panel_o.paused) {
         aiming = false;        
     }
     if(aiming) {
+                
+       avx = -(x_mouse_init - (mouse_x-320))*escalar;
+       avy  = -(y_mouse_init - (mouse_y-240))*escalar;
+        
         v = sqrt(power(vx, 2) + power(vy, 2));
         vx_n = vx / v;
         vy_n = vy / v;
-        
-        avx = -(x_mouse_init - (mouse_x-320))*escalar;
-        avy = -(y_mouse_init - (mouse_y-240))*escalar;
-        
         a_velocityx = avx * vx_n + avy * vy_n;
         a_velocityy = avx * (- vy_n) + avy * vx_n;
         if(mouse_check_button_released(mb_left) && color != draw_getpixel(mouse_x, mouse_y)){
             aimed=true;
             aiming=false;
         }
+    }
+    
+    
+    if(asteroid != -1) {
+        if(radius + asteroid.radius >= point_distance(x, y, asteroid.x, asteroid.y)) {
+            planet_life -= 1;
+            
+            if(planet_life <= 0) {
+                global.all_planets[planet_index_pos].alive = 0;
+                global.all_planets[planet_index_pos] = 0;
+            
+                temp_planets = 0;
+                new_index = 0;
+                count = 0;
+                
+                for(i = 0; i < global.num_planets; i++) {
+                    if(global.all_planets[i] != 0) {
+                        count++;
+                        temp_planets[new_index] = global.all_planets[i];
+                        new_index++;
+                    }
+                }
+                
+                global.all_planets = temp_planets;
+                global.num_planets = count;
+            }
+            else {
+                asteroidCollided = true;
+                pesop= mass/(mass+asteroid.mass);
+                pesoa= asteroid.mass/(mass+asteroid.mass);
+                collision_vx = vx*pesop + a_velocityx*pesoa;
+                collision_vy = vy*pesop + a_velocityy*pesoa;
+            }
+            
+            asteroid.kill = true;
+            asteroid = -1;
+            ctrl_panel_o.paused = false;
+            camera_o.target = sun_o;
+        }   
     }
 }
 if(alive && !ctrl_panel_o.paused){
@@ -62,100 +101,64 @@ if(alive && !ctrl_panel_o.paused){
         global.num_planets = count;   
     }
     else {
-        if(asteroid != -1) {
-            if(radius + asteroid.radius >= point_distance(x, y, asteroid.x, asteroid.y)) {
-                planet_life -= 1;
-                
-                if(planet_life <= 0) {
-                    global.all_planets[planet_index_pos].alive = 0;
-                    global.all_planets[planet_index_pos] = 0;
-                
-                    temp_planets = 0;
-                    new_index = 0;
-                    count = 0;
-                    
-                    for(i = 0; i < global.num_planets; i++) {
-                        if(global.all_planets[i] != 0) {
-                            count++;
-                            temp_planets[new_index] = global.all_planets[i];
-                            new_index++;
-                        }
-                    }
-                    
-                    global.all_planets = temp_planets;
-                    global.num_planets = count;
-                }
-                else {
-                    asteroidCollided = true;
-                
-                    collision_vx = ((mass * vx) + (asteroid.mass * asteroid.vx)) / (mass + asteroid.mass);
-                    collision_vy = ((mass * vy) + (asteroid.mass * asteroid.vy)) / (mass + asteroid.mass);
-                }
-                
-                asteroid.kill = true;
-                asteroid = -1;
-            }   
-        }
-        else {
-            for(i = global.num_planets - 1; i >= 0; i--) { 
-                if(!(object_index == global.all_planets[i])) {
-                    if(global.all_planets[i].radius + radius >= point_distance(x, y, global.all_planets[i].x, global.all_planets[i].y)) {
-                        num_collision++;
-                        last_index_collision = collision_index[0];
-                        collision_index[num_collision] = i;  
-                    }          
-                }
-                else {
-                    planet_index_pos = i;
-                }
-            }
-            
-            if(num_collision > -1) {
-                if(last_index_collision != collision_index[num_collision]) {
-                    planet_life -= num_collision + 1;
-                }
-                
-                if(planet_life <= 0) {
-                    global.all_planets[planet_index_pos].alive = 0;
-                    global.all_planets[planet_index_pos] = 0;
-                
-                    temp_planets = 0;
-                    new_index = 0;
-                    count = 0;
-                    
-                    for(i = 0; i < global.num_planets; i++) {
-                        if(global.all_planets[i] != 0) {
-                            count++;
-                            temp_planets[new_index] = global.all_planets[i];
-                            new_index++;
-                        }
-                    }
-                    
-                    global.all_planets = temp_planets;
-                    global.num_planets = count;
-                }
-                else {
-                    va = sqrt(power(global.all_planets[collision_index[0]].vx, 2) + power(global.all_planets[collision_index[0]].vy, 2));
-                    vp = sqrt(power(vx, 2) + power(vy, 2));
-                    
-                    tetaa = point_direction(0, 0, global.all_planets[collision_index[0]].vx, global.all_planets[collision_index[0]].vy);
-                    tetap = point_direction(0, 0, vx, vy);
-                    
-                    dot = vx * global.all_planets[collision_index[0]].vx + vy * global.all_planets[collision_index[0]].vy; 
-                    phi = arccos(dot / (va * vp));
-                    
-                    numerator = vp * cos(tetap - phi) * (mass - global.all_planets[collision_index[0]].mass) + 2 * global.all_planets[collision_index[0]].mass * va * cos(tetaa - phi);
-                    denominator = mass + global.all_planets[collision_index[0]].mass;
-                    
-                    collision_vx = (numerator / denominator) * cos(phi) + vp * sin(tetap - phi) * cos(phi + 90);                    
-                    collision_vy = (numerator / denominator) * sin(phi) + vp * sin(tetap - phi) * sin(phi + 90);
-                    //collision_vx = ((mass * vx) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vx)) / (mass + global.all_planets[collision_index[0]].mass);
-                    //collision_vy = ((mass * vy) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vy)) / (mass + global.all_planets[collision_index[0]].mass);
-                }
+        for(i = global.num_planets - 1; i >= 0; i--) { 
+            if(!(object_index == global.all_planets[i])) {
+                if(global.all_planets[i].radius + radius >= point_distance(x, y, global.all_planets[i].x, global.all_planets[i].y)) {
+                    num_collision++;
+                    last_index_collision = collision_index[0];
+                    collision_index[num_collision] = i;  
+                }          
             }
             else {
-                last_index_collision = -1;
+                planet_index_pos = i;
             }
+        }
+        
+        if(num_collision > -1) {
+            if(last_index_collision != collision_index[num_collision]) {
+                planet_life -= num_collision + 1;
+            }
+            
+            if(planet_life <= 0) {
+                global.all_planets[planet_index_pos].alive = 0;
+                global.all_planets[planet_index_pos] = 0;
+            
+                temp_planets = 0;
+                new_index = 0;
+                count = 0;
+                
+                for(i = 0; i < global.num_planets; i++) {
+                    if(global.all_planets[i] != 0) {
+                        count++;
+                        temp_planets[new_index] = global.all_planets[i];
+                        new_index++;
+                    }
+                }
+                
+                global.all_planets = temp_planets;
+                global.num_planets = count;
+            }
+            else {
+                va = sqrt(power(global.all_planets[collision_index[0]].vx, 2) + power(global.all_planets[collision_index[0]].vy, 2));
+                vp = sqrt(power(vx, 2) + power(vy, 2));
+                
+                tetaa = point_direction(0, 0, global.all_planets[collision_index[0]].vx, global.all_planets[collision_index[0]].vy);
+                tetap = point_direction(0, 0, vx, vy);
+                
+                dot = vx * global.all_planets[collision_index[0]].vx + vy * global.all_planets[collision_index[0]].vy; 
+                phi = arccos(dot / (va * vp));
+                
+                numerator = vp * cos(tetap - phi) * (mass - global.all_planets[collision_index[0]].mass) + 2 * global.all_planets[collision_index[0]].mass * va * cos(tetaa - phi);
+                denominator = mass + global.all_planets[collision_index[0]].mass;
+                
+                collision_vx = (numerator / denominator) * cos(phi) + vp * sin(tetap - phi) * cos(phi + 90);                    
+                collision_vy = (numerator / denominator) * sin(phi) + vp * sin(tetap - phi) * sin(phi + 90);
+                //collision_vx = ((mass * vx) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vx)) / (mass + global.all_planets[collision_index[0]].mass);
+                //collision_vy = ((mass * vy) + (global.all_planets[collision_index[0]].mass * global.all_planets[collision_index[0]].vy)) / (mass + global.all_planets[collision_index[0]].mass);
+            }
+        }
+        else {
+            last_index_collision = -1;
         }
     }
         

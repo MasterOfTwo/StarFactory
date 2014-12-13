@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = 500;
-y = 0;
+            <string>//x = 500;
+//y = 0;
 //r = point_distance(x, y, target.x, target.y);
 ax = 0;
 ay = 0;
@@ -35,8 +35,8 @@ vy = 5;
 v = 0;
 a = 0;
 //target = 0;
-mass = 50;
-radius = 5;
+mass = 5;
+radius = 1;
 alive = 1;
 color = c_fuchsia;
 prev_x[0] = x;

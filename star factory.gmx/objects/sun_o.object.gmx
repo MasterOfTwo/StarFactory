@@ -43,6 +43,7 @@ m=mH+mHe+mLi2Fe+mHeavy;
 radius=11.5;
 alive=1;
 temperature=17000;
+aimed = false;
 </string>
           </argument>
         </arguments>

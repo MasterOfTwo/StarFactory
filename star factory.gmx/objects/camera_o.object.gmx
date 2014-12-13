@@ -130,7 +130,7 @@ if (instance_exists(target)) {
 global.camera_d = pan
 tilt += (window_mouse_get_y() - window_get_height() / 2) * rotspeed_y
 tilt = max(-89.9, min(89.9, tilt))*/
-if(!ctrl_panel_o.isOn){
+if(!ctrl_panel_o.isOn &amp;&amp; target == sun_o){
     if(mouse_check_button(mb_left)) {
         pan += (mouse_x - x_mouse_init) * rotspeed_x;
         global.camera_d = pan;

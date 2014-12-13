@@ -209,8 +209,8 @@ other_elems_slider_o.stored+=1;
             timer=90;
         }
     }
-    if(mx&gt;leftx-dcenter &amp;&amp; mx&lt;=leftx+dcenter &amp;&amp; my&gt;lefty-dcenter &amp;&amp; my&lt;=lefty+dcenter){
-        if(camera_o.index &gt; array_length_1d(camera_o.targets) - 2) {
+    if(camera_o.target.aimed &amp;&amp; mx&gt;leftx-dcenter &amp;&amp; mx&lt;=leftx+dcenter &amp;&amp; my&gt;lefty-dcenter &amp;&amp; my&lt;=lefty+dcenter){
+        /*if(camera_o.index &gt; array_length_1d(camera_o.targets) - 2) {
             camera_o.index = 0;
         }
         else {
@@ -226,10 +226,20 @@ other_elems_slider_o.stored+=1;
             }
         }
       
-        camera_o.target = camera_o.targets[camera_o.index];
+        camera_o.target = camera_o.targets[camera_o.index];*/
+         
+      camera_o.target.asteroid = instance_create(x, y, asteroid_o);
+      camera_o.target.asteroid.target = camera_o.target;
+      camera_o.target.asteroid.x = camera_o.target.x - camera_o.target.a_velocityx * 5;
+      camera_o.target.asteroid.y = camera_o.target.y - camera_o.target.a_velocityy * 5;
+      with(camera_o.target.asteroid) {
+         event_perform(ev_create, 0);
+         event_perform(ev_draw, 0);
+      }
+      aimed = false;
     }
     if(mx&gt;rightx-dcenter &amp;&amp; mx&lt;=rightx+dcenter &amp;&amp; my&gt;righty-dcenter &amp;&amp; my&lt;=righty+dcenter){
-        if(camera_o.index &lt; 1) {
+        /*if(camera_o.index &lt; 1) {
             camera_o.index = array_length_1d(camera_o.targets) - 1;
             
             while(camera_o.targets[camera_o.index].alive == 0) {
@@ -244,7 +254,7 @@ other_elems_slider_o.stored+=1;
             }
         }
         
-        camera_o.target = camera_o.targets[camera_o.index];
+        camera_o.target = camera_o.targets[camera_o.index];*/
     }
 }
 if(updating){
