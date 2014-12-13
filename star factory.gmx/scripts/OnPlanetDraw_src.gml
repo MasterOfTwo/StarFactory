@@ -7,7 +7,26 @@ if(alive){
         draw_set_color(c_yellow)
         draw_line(x, y, x + ax*1000, y + ay*1000)
         d3d_transform_set_identity()
-        draw_set_color(c_white)   
+        draw_set_color(c_white)
+        
+        if(aiming || aimed) {
+            show_debug_message("estouaqi");
+            show_debug_message(x_mouse_init);
+            show_debug_message(y_mouse_init);
+            draw_set_color(c_orange)
+            d3d_transform_set_identity()
+            draw_line(x, y, a_velocityx+x , a_velocityy+y)
+            d3d_transform_set_identity()
+            draw_set_color(c_white)
+            /*pan += (mouse_x - x_mouse_init) * rotspeed_x;
+            global.camera_d = pan;
+            tilt += (mouse_y - y_mouse_init) * rotspeed_y
+            tilt = max(-89.9, min(89.9, tilt))*/
+        }
+        else {
+            x_mouse_init = mouse_x;
+            y_mouse_init = mouse_y;
+        }   
     }
     
     draw_set_color(color)

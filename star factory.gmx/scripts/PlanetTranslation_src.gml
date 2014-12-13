@@ -1,5 +1,31 @@
+escalar = power(150,2)/(power(320,2)+power(240,2));
 if(r > death_distance) {
     alive = 0;        
+}
+if(ctrl_panel_o.paused) {
+    if(mouse_check_button_pressed(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
+        aiming = true;
+        x_mouse_init = mouse_x-320;
+        y_mouse_init = mouse_y-240;        
+    }
+    if(mouse_check_button_released(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
+        aiming = false;        
+    }
+    if(aiming) {
+        v = sqrt(power(vx, 2) + power(vy, 2));
+        vx_n = vx / v;
+        vy_n = vy / v;
+        
+        avx = -(x_mouse_init - (mouse_x-320))*escalar;
+        avy = -(y_mouse_init - (mouse_y-240))*escalar;
+        
+        a_velocityx = avx * vx_n + avy * vy_n;
+        a_velocityy = avx * (- vy_n) + avy * vx_n;
+        if(mouse_check_button_released(mb_left) && color != draw_getpixel(mouse_x, mouse_y)){
+            aimed=true;
+            aiming=false;
+        }
+    }
 }
 if(alive && !ctrl_panel_o.paused){
     if(asteroid == -1 && mouse_check_button(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
