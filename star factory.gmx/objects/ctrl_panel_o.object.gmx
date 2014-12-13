@@ -324,10 +324,13 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
           <argument>
             <kind>1</kind>
             <string>if(isOn &amp;&amp; !gameOver){
-    draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
-    draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
+    //draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
+    //draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
     if(!updating) draw_sprite(play_sp,0,ppx,ppy);
     if(camera_o.target==sun_o){
+        draw_set_alpha(0.5);
+        draw_roundrect_colour(500 - 15, 5, 635, 170, c_dkgray, c_dkgray, false);
+        draw_set_alpha(1.0);
         draw_text(500,10,"Mass: "+string_format(sun_o.m, 3, 2)+"Mt");
         draw_text(500,30,"H: "+string_format((sun_o.mH/sun_o.m)*100, 3, 2)+"%");
         draw_text(500,50,"He: "+string_format((sun_o.mHe/sun_o.m)*100, 3, 2)+"%");
@@ -342,8 +345,8 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
 }
 
 if(gameOver){
-    draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
-    draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
+    //draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
+    //draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
     draw_text(8,60,"Game Over!"); 
     if(sun_o.alive){
         points=0;

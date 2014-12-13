@@ -50,17 +50,21 @@ py=180;
           <argument>
             <kind>1</kind>
             <string>if(ctrl_panel_o.isOn &amp;&amp; !ctrl_panel_o.updating &amp;&amp; !ctrl_panel_o.gameOver){
+    draw_set_alpha(0.5);
+    draw_roundrect_colour(500 - 15, 220 - 5, 635, 370, c_dkgray, c_dkgray, false);
+    draw_set_alpha(1.0);
+
     draw_set_halign(fa_right);
-    draw_text(640 - 15, 120, "Objectives:");
+    draw_text(640 - 15, 220, "Objectives:");
     draw_set_colour(c_aqua);
     
     if (camera_o.target==sun_o) {        
-        draw_text(640, 160, "Get the#Sun to#900Mt"); 
+        draw_text(640 - 15, 250, "Get the Sun to#900Mt"); 
         draw_set_colour(c_orange);
-        draw_text(640, 220, "A planet in#this system#has a bonus#objective!");
+        draw_text(640 - 15, 300, "A planet in this#system has#a bonus#objective!");
         draw_set_colour(c_aqua);
     } else if (camera_o.target==earth_o) {
-        draw_text(640, 160, "This planet#can support#life if the#Star's temperature#stays between#4800k and 5200k");
+        draw_text(640, 260, "This planet#can support#life if the#Star's temperature#stays between#4800k and 5200k");
     }
     draw_set_colour(c_white);
     draw_set_halign(fa_left);

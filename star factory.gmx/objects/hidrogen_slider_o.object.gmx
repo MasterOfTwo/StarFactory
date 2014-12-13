@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>px=0
-py=64
+            <string>px=0;
+py=64;
 sliderPos=0;
 name="Hydrogen";
 stored=0;
