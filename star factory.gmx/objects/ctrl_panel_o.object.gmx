@@ -38,7 +38,7 @@ sliderButtonY=sliderTrackY;
 textX=16;
 textY=4;
 rot=180;
-ppx=24;
+ppx=29;
 ppy=366;
 pgox=548;
 pgoy=428;
@@ -90,79 +90,8 @@ if(instance_exists(neptune_o)) {
 }
 
 global.all_planets = planets;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>30</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>30</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>hidrogen_slider_o.stored+=1;
-helium_slider_o.stored+=1;
-other_elems_slider_o.stored+=1;
+
+elem_timer=30;
 </string>
           </argument>
         </arguments>
@@ -198,7 +127,7 @@ other_elems_slider_o.stored+=1;
             rot=(rot+180)%360;
         }
     }
-    if(!updating &amp;&amp; isOn &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
+    if(!updating &amp;&amp; isOn &amp;&amp; camera_o.target==sun_o &amp;&amp; mx&gt;ppx-dcenter &amp;&amp; mx&lt;=ppx+dcenter &amp;&amp; my&gt;ppy-dcenter &amp;&amp; my&lt;=ppy+dcenter){
         //cost = 3*(hidrogen_slider_o.sliderPos) + helium_slider_o.sliderPos;
         h=hidrogen_slider_o.sliderPos&lt;=hidrogen_slider_o.stored;
         he=helium_slider_o.sliderPos&lt;=helium_slider_o.stored;
@@ -227,16 +156,23 @@ other_elems_slider_o.stored+=1;
         }
       
         camera_o.target = camera_o.targets[camera_o.index];*/
-         
-      camera_o.target.asteroid = instance_create(x, y, asteroid_o);
-      camera_o.target.asteroid.target = camera_o.target;
-      camera_o.target.asteroid.x = camera_o.target.x - camera_o.target.a_velocityx * 5;
-      camera_o.target.asteroid.y = camera_o.target.y - camera_o.target.a_velocityy * 5;
-      with(camera_o.target.asteroid) {
-         event_perform(ev_create, 0);
-         event_perform(ev_draw, 0);
-      }
-      aimed = false;
+        if(other_elems_slider_o.stored&gt;=50){
+          other_elems_slider_o.stored-=50;
+          camera_o.target.asteroid = instance_create(x, y, asteroid_o);
+          camera_o.target.asteroid.target = camera_o.target;
+          sx = -camera_o.target.a_velocityx;
+          sy = -camera_o.target.a_velocityy;
+          s=sqrt(power(sx,2)+power(sy,2));
+          sx/=s;
+          sy/=s;      
+          camera_o.target.asteroid.x = camera_o.target.x + sx * 50;
+          camera_o.target.asteroid.y = camera_o.target.y + sy * 50;
+          with(camera_o.target.asteroid) {
+             event_perform(ev_create, 0);
+             event_perform(ev_draw, 0);
+          }
+          camera_o.target.aimed = false;
+        }
     }
     if(mx&gt;rightx-dcenter &amp;&amp; mx&lt;=rightx+dcenter &amp;&amp; my&gt;righty-dcenter &amp;&amp; my&lt;=righty+dcenter){
         /*if(camera_o.index &lt; 1) {
@@ -289,6 +225,13 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
         room_restart();
     }
 }
+if(elem_timer==0){
+    hidrogen_slider_o.stored+=1;
+    helium_slider_o.stored+=1;
+    other_elems_slider_o.stored+=1;
+    elem_timer=30;
+}
+if(camera_o.target==sun_o) elem_timer--;
 </string>
           </argument>
         </arguments>
@@ -338,10 +281,10 @@ if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
     //draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     //draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
     if(!updating) {
-        draw_sprite(play_sp,0,ppx + 5,ppy);
-        draw_sprite(meteor_sp,0,ppx + 65,ppy);
+        if(camera_o.target.aimed) draw_sprite(meteor_sp,0,leftx, lefty);
     }
     if(camera_o.target==sun_o){
+        draw_sprite(play_sp,0,ppx,ppy);
         draw_set_alpha(0.5);
         draw_roundrect_colour(500 - 15, 5, 635, 170, c_dkgray, c_dkgray, false);
         draw_set_alpha(1.0);

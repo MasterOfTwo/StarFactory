@@ -9,7 +9,8 @@ if(ctrl_panel_o.paused) {
         y_mouse_init = mouse_y-240;        
     }
     if(mouse_check_button_released(mb_left) && color == draw_getpixel(mouse_x, mouse_y)) {
-        aiming = false;        
+        aiming = false; 
+        aimed = false;       
     }
     if(aiming) {
                 
