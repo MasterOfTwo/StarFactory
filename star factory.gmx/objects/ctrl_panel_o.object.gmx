@@ -56,6 +56,7 @@ ox=308;
 oy=456;
 paused = false;
 global.num_planets = 0;
+num_asteroids_used = 0;
  
 if(instance_exists(mercury_o)) {
     planets[0] = mercury_o;
@@ -168,7 +169,8 @@ objective_complete = false;
           sy = -camera_o.target.a_velocityy;
           s=sqrt(power(sx,2)+power(sy,2));
           sx/=s;
-          sy/=s;      
+          sy/=s;
+          num_asteroids_used++;      
           camera_o.target.asteroid.x = camera_o.target.x + sx * 50;
           camera_o.target.asteroid.y = camera_o.target.y + sy * 50;
           with(camera_o.target.asteroid) {
@@ -221,7 +223,10 @@ if(updating){
             gameOver=1;
         }*/
     }
-    if(gameOver) isOn=0;
+    if(gameOver) {
+        isOn=0;
+        updating=(updating+1)%2;
+    }
 }
 if(gameOver &amp;&amp; mouse_check_button_pressed(mb_left)){
     mx=mouse_x;
@@ -242,7 +247,7 @@ if(camera_o.target==sun_o) {
     elem_timer--;
     objective_timer--;
 }
-if(objective_timer == 0) {
+if(objective_timer == 0 &amp;&amp; !gameOver) {
     obj_time--;
     objective_timer = 30;
 }
@@ -307,28 +312,37 @@ if(obj_time == 0 || mercury_o.alive == 0 || mars_o.alive == 0) {
         if(camera_o.target.aimed) draw_sprite(meteor_sp,0,leftx, lefty);
     }
     if(camera_o.target==sun_o){
-        draw_sprite(play_sp,0,ppx,ppy);
+        if(hidrogen_slider_o.sliderPos != 0 || helium_slider_o.sliderPos != 0 || other_elems_slider_o.sliderPos != 0) {
+            if(!updating) {
+                draw_sprite(play_sp,0,ppx,ppy);
+            }
+        }
         draw_set_alpha(0.5);
-        draw_roundrect_colour(500 - 15, 5, 635, 170, c_dkgray, c_dkgray, false);
+        draw_roundrect_colour(500 - 10, 15, 640, 190, c_dkgray, c_dkgray, false);
         draw_set_alpha(1.0);
-        draw_text(500,10,"Mass: "+string_format(sun_o.m, 3, 2)+"Mt");
-        draw_text(500,30,"H: "+string_format((sun_o.mH/sun_o.m)*100, 3, 2)+"%");
-        draw_text(500,50,"He: "+string_format((sun_o.mHe/sun_o.m)*100, 3, 2)+"%");
-        draw_text(500,70,"Li-Fe: "+string_format((sun_o.mLi2Fe/sun_o.m)*100, 3, 2)+"%");
-        draw_text(500,90,"Heavy: "+string_format((sun_o.mHeavy/sun_o.m)*100, 3, 2)+"%");
-        draw_text(500,110,"T: "+string_format(sun_o.temperature, 5, 2)+"K");
-        draw_text(500,150,"T: "+string_format(earth_o.temperature, 5, 2)+"K");
+        draw_set_colour(c_yellow);
+        draw_text_transformed(500, 20, "Star Information:", 0.9, 0.9, 0);
+        draw_set_colour(c_white);
+        draw_text(500, 50,"Name: Sun");
+        draw_text(500, 70,"Mass: "+string_format(sun_o.m, 3, 2)+"Mt");
+        draw_text(500, 90,"H: "+string_format((sun_o.mH/sun_o.m)*100, 3, 2)+"%");
+        draw_text(500, 110,"He: "+string_format((sun_o.mHe/sun_o.m)*100, 3, 2)+"%");
+        draw_text(500, 130,"Li-Fe: "+string_format((sun_o.mLi2Fe/sun_o.m)*100, 3, 2)+"%");
+        draw_text(500, 150,"Heavy: "+string_format((sun_o.mHeavy/sun_o.m)*100, 3, 2)+"%");
+        draw_text(500, 170,"T: "+string_format(sun_o.temperature, 5, 2)+"K");
+        //draw_text(500,150,"T: "+string_format(earth_o.temperature, 5, 2)+"K");
         
         draw_set_alpha(0.5);
-        draw_roundrect_colour(500 - 15, 220 - 5, 635, 370, c_dkgray, c_dkgray, false);
+        draw_roundrect_colour(500 - 10, 210 - 5, 640, 335, c_dkgray, c_dkgray, false);
         draw_set_alpha(1.0);
         
-        draw_set_halign(fa_right);
-        draw_text(640 - 15, 220, "Objective:");
+        //draw_set_halign(fa_right);
+        draw_set_colour(c_yellow);
+        draw_text(500, 210, "Objective:");
         
         if (camera_o.target==sun_o) {
-            draw_set_colour(c_aqua);        
-            draw_text(640 - 15, 250, "Collide# planet Mercury# with #planet Mars!"); 
+            draw_set_colour(c_white);        
+            draw_text(500, 240, "Planet Mercury#must collide #with planet #Mars before #the time runs #out!"); 
             /*draw_set_colour(c_orange);
             draw_text(640 - 15, 300, "A planet in this#system has#a bonus#objective!");
             draw_set_colour(c_aqua);*/
@@ -337,20 +351,22 @@ if(obj_time == 0 || mercury_o.alive == 0 || mars_o.alive == 0) {
         draw_set_halign(fa_left);
     }else{
         draw_set_alpha(0.5);
-        draw_roundrect_colour(0, 55, 220, 140, c_dkgray, c_dkgray, false);
+        draw_roundrect_colour(450 - 10, 15, 720, 130, c_dkgray, c_dkgray, false);
         draw_set_alpha(1.0);
         
         if (step_count mod 40 &lt; 20)
             draw_sprite_ext(pause_sp, false, 320, 65, 1,1,0, c_white, 1);
-            
-        draw_text(8,60,"Planet: "+camera_o.target.name);
-        draw_text(8,80,"Orbital Speed: "+ string(camera_o.target.myspeed));
-        draw_text(8,100,"Hit Points: "+ string(camera_o.target.planet_life));
+        draw_set_colour(c_yellow);
+        draw_text_transformed(450, 20, "Planet Information:", 0.9, 0.9, 0);
+        draw_set_colour(c_white);
+        draw_text_transformed(450, 50, "Name: "+camera_o.target.name, 0.9, 0.9, 0);
+        draw_text_transformed(450, 70, "Orbital Speed: "+ string(camera_o.target.myspeed), 0.9, 0.9, 0);
+        draw_text_transformed(450, 90, "Hit Points: "+ string(camera_o.target.planet_life), 0.9, 0.9, 0);    
         if(!camera_o.target.aimed) {
-            draw_text(8,120,"Li-Fe Quantity: "+ string(other_elems_slider_o.stored));
+            draw_text_transformed(450, 110, "Li-Fe Quantity: "+ string(other_elems_slider_o.stored), 0.9, 0.9, 0);
         } 
         else {
-            draw_text(8,120,"Li-Fe Quantity: "+ string(other_elems_slider_o.stored) + "(-50)");
+            draw_text_transformed(450, 110, "Li-Fe Quantity: "+ string(other_elems_slider_o.stored) + "(-50)", 0.9, 0.9, 0);
         }
         step_count++;
     }
@@ -359,31 +375,47 @@ if(obj_time == 0 || mercury_o.alive == 0 || mars_o.alive == 0) {
 if(gameOver){
     //draw_sprite_ext(gui_guard_sp, 0,0,240,1,1,0,c_white,1);
     //draw_sprite_ext(gui_guard_sp, 0,640,240,1,1,180,c_white,1);
-    draw_text(8,60,"Game Over!"); 
-    if(sun_o.alive){
+    paused = true;
+    if(objective_complete) {
+        draw_text(8,60,"Objective Complete!");
+    }
+    else {
+        draw_text(8,60,"Game Over!");
+    } 
+    if(sun_o.alive &amp;&amp; objective_complete){
         points=0;
         planet_points = global.num_planets*1000;
         points += planet_points;
         draw_text(8, 80, string_format(global.num_planets, 1, 0) + " Planets survived: " + string_format(planet_points, 0, 0) + " Points");
-        if(sun_o.temperature &gt;= 4800 &amp;&amp; sun_o.temperature &lt;= 5200) {
-            points += 2000;
-            draw_text(8, 100, "Life on Earth: 2000 Points");
+        draw_text(8, 100, "Time remaining bonus: " + string_format(obj_time * 100, 3, 0) + " Points");
+        points += obj_time * 100;
+        if(num_asteroids_used &lt; 10) {
+            draw_text(8, 120, "Asteroids used bonus: " + string_format(1000 - (num_asteroids_used * 100), 3, 0) + " Points");
+            points += 1000 - (num_asteroids_used * 100);
         }
-        if(coin_purse_o.coins &gt; 0) {
-            points += 2 * coin_purse_o.coins;
-            draw_text(8, 100, "Coins saved: " + string_format(coin_purse_o.coins, 0, 0) + " Points");
-        }
-        draw_text(8,240,"Final Score: "+string(points) + " Points");
+        draw_text(8,240,"Final Score: "+ string(points) + " Points");
     }else{
-        draw_text(8,80,"You blew up the sun!");
-        draw_text(8,100,"Final Score: 0 Points");
+        if(!sun_o.alive) {
+            draw_text(8,80,"You blew up the sun!");
+            draw_text(8,100,"Final Score: 0 Points");
+        }
+        else {
+            if(obj_time == 0) {
+                draw_text(8,80,"You ran out of time!");
+            }
+            if(mercury_o.alive == 0) {
+                draw_text(8,80,"Planet Mercury has died!");
+            }
+            if(mars_o.alive == 0) {
+                draw_text(8,80,"Planet Mars has died!"); 
+            }
+            
+            draw_text(8,100,"Final Score: 0 Points");
+        }
     }
     draw_sprite(game_over_sp,0,pgox,pgoy);
 }else{
     draw_sprite_ext(ctrl_panel_sp, 0,px,py,1,1,rot,c_white,1);
-    //draw_sprite_ext(orbit_sp,0,ox,oy,0.505631,0.505631,0,c_white,1);
-    //draw_sprite_ext(left_sp,0,leftx,lefty,1,1,0,c_white,1);
-    //draw_sprite_ext(left_sp,0,rightx,righty,1,1,180,c_white,1);
 }
 
 </string>
